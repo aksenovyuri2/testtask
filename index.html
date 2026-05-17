@@ -639,25 +639,21 @@ section.light .bullets li{ color:rgba(14,26,31,0.82); }
     <!-- 4 leakage points -->
     <div class="grid" style="grid-template-columns:repeat(4,1fr); gap:24px; flex:1 1 auto;">
       <div class="card" style="display:flex; flex-direction:column; gap:14px;">
-        <span class="pill solid">ранг 1</span>
         <div class="h5" style="font-size:26px;">Навигация и «две корзины»</div>
         <div class="body-sm">Два сценария в одном приложении с разными корзинами. Маркет «ниже сгиба», поэтому ложные заходы, а на финале смешанные корзины рвутся.</div>
         <div class="body-xs mono" style="margin-top:auto; color:var(--red);">→ Exposure · CTR · Checkout</div>
       </div>
       <div class="card" style="display:flex; flex-direction:column; gap:14px;">
-        <span class="pill solid">ранг 2</span>
         <div class="h5" style="font-size:26px;">Лишний клик до ATC</div>
         <div class="body-sm">В списке товаров нет кнопки «+» — даже простой товар без вариантов требует открыть карточку. Импульс гаснет, повтор страдает.</div>
         <div class="body-xs mono" style="margin-top:auto; color:var(--red);">→ ATC CVR · ATC latency</div>
       </div>
       <div class="card" style="display:flex; flex-direction:column; gap:14px;">
-        <span class="pill solid">ранг 3</span>
         <div class="h5" style="font-size:26px;">Смешанные корзины</div>
         <div class="body-sm">Проблема не в платежах, а в структуре: разные источники → разные правила оформления. Без «моста» — потеря контекста.</div>
         <div class="body-xs mono" style="margin-top:auto; color:var(--red);">→ Checkout CVR mixed</div>
       </div>
       <div class="card" style="display:flex; flex-direction:column; gap:14px;">
-        <span class="pill solid">ранг 4</span>
         <div class="h5" style="font-size:26px;">Боли после покупки</div>
         <div class="body-sm">Задержки, недовложения, возвраты в Маркете рвут связь между «купил» и «получил». NPS и повтор падают.</div>
         <div class="body-xs mono" style="margin-top:auto; color:var(--red);">→ Fulfillment · Repeat</div>
@@ -915,7 +911,7 @@ section.light .bullets li{ color:rgba(14,26,31,0.82); }
     <div class="row" style="justify-content:space-between; align-items:flex-end;">
       <div>
         <div class="kicker">03 · Приоритизация</div>
-        <div class="h1" style="margin-top:14px;">ЧЕТЫРЕ <span class="red">УЗЛА.</span></div>
+        <div class="h1" style="margin-top:14px;">ЧЕТЫРЕ <span class="red">ЭТАПА.</span></div>
       </div>
       <div class="body-sm dim" style="max-width:620px;">
         Фокусируем усилия там, где максимальный мультипликатор к&nbsp;NSM = MBC, и фиксируем, что НЕ&nbsp;является приоритетом сейчас.
@@ -1123,9 +1119,12 @@ section.light .bullets li{ color:rgba(14,26,31,0.82); }
       <div class="col gap-24">
         <div class="card red" style="padding:32px;">
           <div class="eyebrow" style="color:rgba(255,255,255,0.75);">Атрибуция к NSM</div>
-          <div class="h5 mono" style="margin-top:12px; color:#FFF; font-size:20px; line-height:1.5;">
-            ΔMBC = ΔExposure × CTR × Intent<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× ATC × Checkout + …<br/><br/>
+          <div class="h5 mono" style="margin-top:12px; color:#FFF; font-size:14px; line-height:1.55;">
+            ΔMBC = ΔExposure × CTR × Intent × ATC × Checkout<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ Exposure × ΔCTR × Intent × ATC × Checkout<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ Exposure × CTR × ΔIntent × ATC × Checkout<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ Exposure × CTR × Intent × ΔATC × Checkout<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ Exposure × CTR × Intent × ATC × ΔCheckout<br/><br/>
             MDC = MBC × Fulfillment
           </div>
         </div>
