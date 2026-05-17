@@ -1,0 +1,2655 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Магнит · Тестовое задание E-com Lead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* Magnit OMNI–style deck · design tokens & slide chrome
+   Inspired by Magnit OMNI site visual language: dark navy bg, bright red accent,
+   bold uppercase wide grotesque headlines, geometric red parallelograms. */
+
+:root{
+  --bg:        #0E1A1F;        /* very dark teal-navy */
+  --bg-2:      #14242B;        /* card surface */
+  --bg-3:      #1B2D35;        /* elevated */
+  --ink:       #F4EFE7;        /* warm off-white */
+  --ink-2:     rgba(244,239,231,0.78);
+  --ink-3:     rgba(244,239,231,0.58);
+  --hair:      rgba(244,239,231,0.10);
+  --hair-2:    rgba(244,239,231,0.18);
+
+  --red:       #EE1024;        /* core accent — Magnit-like red */
+  --red-deep:  #B70819;
+  --red-soft:  #FF3A4A;
+  --red-glow:  rgba(238,16,36,0.35);
+
+  --light:     #F3EEE6;        /* light card surface for contrast slides */
+  --light-2:   #E7E0D3;
+
+  --f-disp:    "Unbounded", "Wix Madefor Display", system-ui, sans-serif;
+  --f-sans:    "Onest", "Inter", system-ui, sans-serif;
+  --f-mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+
+/* deck-stage chrome */
+deck-stage{ background:var(--bg); --slide-background: var(--bg); }
+body{ margin:0; background:var(--bg); font-family:var(--f-sans); color:var(--ink); }
+
+/* === Slide base ============================================== */
+section{
+  position:relative;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--f-sans);
+  overflow:hidden;
+  letter-spacing:-0.005em;
+}
+section.light{ background:var(--light); color:#0E1A1F; }
+
+/* navbar & footer (consistent across slides) */
+.nav{
+  position:absolute; left:80px; right:80px; top:48px;
+  display:flex; align-items:center; justify-content:space-between;
+  z-index:5;
+}
+.brand{
+  display:inline-flex; align-items:baseline; gap:0;
+  font-family:var(--f-disp); font-weight:800;
+  font-size:30px; line-height:0.95; letter-spacing:-0.01em;
+  color:var(--red); text-transform:uppercase;
+}
+.brand span{ display:block; }
+.brand .b1{ display:block; }
+.brand .b2{ display:block; }
+.brand-stack{
+  display:inline-flex; flex-direction:column;
+  font-family:var(--f-disp); font-weight:800; color:var(--red);
+  text-transform:uppercase; font-size:30px; line-height:0.95; letter-spacing:-0.01em;
+}
+/* nav-links from the site mock — hidden on slides; the deck doesn't need
+   a top-nav. Brand stack stays as the recognisable mark. */
+.nav-links{ display:none; }
+.foot{
+  position:absolute; left:80px; right:80px; bottom:40px;
+  display:flex; align-items:center; justify-content:space-between;
+  font-family:var(--f-mono); font-size:16px; color:var(--ink-3);
+  letter-spacing:0.04em; z-index:5;
+  white-space:nowrap;
+}
+.foot span{ white-space:nowrap; }
+.foot.on-light{ color:rgba(14,26,31,0.55); }
+.nav.on-light .brand-stack{ color:var(--red); }
+.nav.on-light .nav-links{ color:rgba(14,26,31,0.65); }
+
+/* === Type ==================================================== */
+.eyebrow{
+  font-family:var(--f-mono); font-size:18px; font-weight:500;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-3);
+  white-space:nowrap;
+}
+.eyebrow.red{ color:var(--red); }
+.eyebrow.dark{ color:rgba(14,26,31,0.55); }
+
+.kicker{
+  display:inline-flex; align-items:center; gap:18px;
+  font-family:var(--f-mono); font-size:18px; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--ink-3);
+  white-space:nowrap;
+}
+.kicker::before{
+  content:""; width:48px; height:1px; background:var(--red);
+}
+
+.h-mega{
+  font-family:var(--f-disp); font-weight:800;
+  font-size:200px; line-height:0.88; letter-spacing:-0.035em;
+  text-transform:uppercase; color:var(--ink);
+}
+.h1{
+  font-family:var(--f-disp); font-weight:800;
+  font-size:120px; line-height:0.9; letter-spacing:-0.03em;
+  text-transform:uppercase; color:var(--ink);
+}
+.h1.tight{ font-size:88px; line-height:0.92; }
+.h2{
+  font-family:var(--f-disp); font-weight:700;
+  font-size:84px; line-height:0.94; letter-spacing:-0.025em;
+  text-transform:uppercase; color:var(--ink);
+}
+.h2.tight{ font-size:64px; line-height:0.96; }
+.h3{
+  font-family:var(--f-disp); font-weight:700;
+  font-size:64px; line-height:0.98; letter-spacing:-0.02em;
+  text-transform:uppercase; color:var(--ink);
+}
+.h4{
+  font-family:var(--f-disp); font-weight:700;
+  font-size:44px; line-height:1.04; letter-spacing:-0.015em;
+  text-transform:uppercase; color:var(--ink);
+}
+.h5{
+  font-family:var(--f-sans); font-weight:600;
+  font-size:32px; line-height:1.18; letter-spacing:-0.005em;
+  color:var(--ink);
+}
+.h6{
+  font-family:var(--f-sans); font-weight:600;
+  font-size:24px; line-height:1.2; color:var(--ink);
+}
+
+.body{ font-family:var(--f-sans); font-size:24px; line-height:1.4; color:var(--ink-2); font-weight:400; }
+.body-sm{ font-family:var(--f-sans); font-size:20px; line-height:1.45; color:var(--ink-2); font-weight:400; }
+.body-xs{ font-family:var(--f-sans); font-size:16px; line-height:1.45; color:var(--ink-3); }
+
+.num{ font-family:var(--f-disp); font-feature-settings:"tnum" 1; }
+.mono{ font-family:var(--f-mono); }
+
+.red{ color:var(--red); }
+.dim{ color:var(--ink-3); }
+
+/* When inside light section */
+section.light .h1,
+section.light .h2,
+section.light .h3,
+section.light .h4,
+section.light .h5,
+section.light .h6,
+section.light .h-mega{ color:#0E1A1F; }
+section.light .body, section.light .body-sm{ color:rgba(14,26,31,0.78); }
+section.light .body-xs{ color:rgba(14,26,31,0.55); }
+section.light .eyebrow{ color:rgba(14,26,31,0.55); }
+section.light .kicker{ color:rgba(14,26,31,0.55); }
+
+/* === Cards & blocks ========================================== */
+.card{
+  background:var(--bg-2);
+  border-radius:18px;
+  padding:32px;
+  position:relative;
+}
+.card.red{ background:var(--red); color:#FFF; }
+.card.outline{ background:transparent; border:1px solid var(--hair-2); }
+.card.light{ background:#F3EEE6; color:#0E1A1F; }
+
+/* === Red parallelogram (signature graphic device) ============ */
+.parallelo{
+  background:linear-gradient(180deg, var(--red) 0%, var(--red-deep) 95%);
+  transform: skewX(-10deg);
+  transform-origin:top left;
+  position:absolute;
+}
+.parallelo.faded{ opacity:0.85; }
+.disc{ border-radius:50%; background:var(--red); position:absolute; }
+
+/* === Pills / chips =========================================== */
+.pill{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:10px 18px; border-radius:999px;
+  font-family:var(--f-mono); font-size:16px;
+  background:transparent; border:1px solid var(--hair-2); color:var(--ink-2);
+  letter-spacing:0.04em;
+  white-space:nowrap;
+}
+.pill.solid{ background:var(--red); border-color:var(--red); color:#FFF; }
+.pill.ghost-light{ background:rgba(244,239,231,0.06); border-color:rgba(244,239,231,0.12); color:var(--ink); }
+.pill.light-bg{ background:#fff; color:#0E1A1F; border:none; }
+.pill .dot{ width:8px; height:8px; border-radius:50%; background:var(--red); flex:0 0 auto; }
+
+/* delta tags */
+.delta{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--f-mono); font-size:20px; font-weight:500;
+  letter-spacing:0.02em;
+}
+.delta.up{ color:#4DD58F; }
+.delta.down{ color:var(--red); }
+.delta.flat{ color:var(--ink-3); }
+
+/* === Layout helpers ========================================== */
+.pad{ padding:112px 80px 104px 80px; }
+.pad-tight{ padding:104px 80px 88px 80px; }
+.row{ display:flex; }
+.col{ display:flex; flex-direction:column; }
+.grid{ display:grid; }
+.gap-8{ gap:8px; } .gap-12{ gap:12px; } .gap-16{ gap:16px; } .gap-24{ gap:24px; }
+.gap-32{ gap:32px; } .gap-40{ gap:40px; } .gap-48{ gap:48px; } .gap-64{ gap:64px; }
+.fill{ flex:1 1 auto; min-width:0; min-height:0; }
+
+/* === Decorative bits ========================================== */
+.dotgrid{
+  background-image: radial-gradient(currentColor 1.5px, transparent 1.6px);
+  background-size: 18px 18px;
+  color: rgba(244,239,231,0.18);
+}
+section.light .dotgrid{ color:rgba(14,26,31,0.18); }
+
+.stripes{
+  background-image: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 14px);
+  color: rgba(244,239,231,0.14);
+}
+
+/* hr lines */
+hr.rule{ border:0; border-top:1px solid var(--hair-2); margin:0; height:0; }
+hr.rule-strong{ border:0; border-top:2px solid var(--ink); margin:0; }
+section.light hr.rule{ border-top-color:rgba(14,26,31,0.15); }
+section.light hr.rule-strong{ border-top-color:#0E1A1F; }
+
+/* tables */
+.tab{ width:100%; border-collapse:collapse; }
+.tab th{
+  text-align:left; padding:12px 14px;
+  font-family:var(--f-mono); font-size:13px; font-weight:500;
+  letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3);
+  border-bottom:1.5px solid var(--ink);
+}
+.tab td{
+  padding:14px 14px; vertical-align:top;
+  border-bottom:1px solid var(--hair);
+  font-family:var(--f-sans); font-size:17px; line-height:1.35; color:var(--ink);
+}
+.tab.dense td{ padding:10px 12px; font-size:15px; }
+.tab.dense th{ padding:10px 12px; }
+.tab td .body-xs{ font-size:14px; }
+section.light .tab th{ color:rgba(14,26,31,0.55); border-bottom-color:#0E1A1F; }
+section.light .tab td{ color:#0E1A1F; border-bottom-color:rgba(14,26,31,0.12); }
+
+/* numbered list */
+.numlist{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:18px; }
+.numlist li{
+  display:grid; grid-template-columns:80px minmax(0, 1fr); gap:24px;
+  align-items:baseline; padding-bottom:18px; border-bottom:1px solid var(--hair);
+}
+.numlist li .n{
+  font-family:var(--f-disp); font-weight:700; font-size:48px;
+  color:var(--red); line-height:1;
+}
+section.light .numlist li{ border-bottom-color:rgba(14,26,31,0.12); }
+
+/* bullet — position:absolute marker so inline text/strong don't get split
+   into separate grid items (which made every word stack vertically). */
+.bullets{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+.bullets li{
+  position:relative;
+  padding-left:24px;
+  font-family:var(--f-sans); font-size:20px; line-height:1.4; color:var(--ink-2);
+}
+.bullets li::before{
+  content:""; position:absolute; left:0; top:0.55em;
+  width:8px; height:8px; background:var(--red);
+}
+section.light .bullets li{ color:rgba(14,26,31,0.82); }
+
+/* === Specific shapes ========================================== */
+.bigstat{
+  font-family:var(--f-disp); font-weight:800;
+  font-size:180px; line-height:0.85; letter-spacing:-0.04em;
+  color:#FFF;
+}
+.bigstat .unit{ font-size:0.42em; line-height:1; font-weight:700; opacity:0.95; }
+
+/* arrow */
+.arrow{
+  font-family:var(--f-disp); font-weight:700; color:var(--red);
+}
+
+</style>
+<style>
+  /* Slide-specific tweaks live inline-small. Most styling is in magnit.css. */
+  .gn-grid{ display:grid; grid-template-columns:repeat(12, 1fr); gap:24px; }
+</style>
+</head>
+<body>
+
+<deck-stage>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S1 · TITLE
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="01 Title">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <!-- decorative red parallelograms bottom-right -->
+  <div class="parallelo" style="right:-260px; bottom:-160px; width:480px; height:900px; transform:skewX(-12deg) translateY(0);"></div>
+  <div class="parallelo faded" style="right:-440px; bottom:-200px; width:480px; height:980px; transform:skewX(-12deg); opacity:0.55;"></div>
+  <div class="disc" style="right:200px; top:140px; width:140px; height:140px; opacity:0.35;"></div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:space-between; gap:24px;">
+    <div></div>
+    <div>
+      <div class="h-mega" style="color:var(--ink); font-size:200px; max-width:1700px;">ТЕСТОВОЕ ЗАДАНИЕ<br/><span style="color:var(--red);">E-COM&nbsp;LEAD.</span></div>
+    </div>
+    <div class="row gap-48" style="align-items:flex-end; max-width:1500px;">
+      <div class="body" style="max-width:1100px; font-size:28px; line-height:1.4;">
+        Как вырастить долю покупателей Магнит&nbsp;Маркет внутри&nbsp;ОМНИ с&nbsp;1% до&nbsp;20%+ за&nbsp;два года —
+        через&nbsp;продукт, метрики и&nbsp;дисциплину экспериментов.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span></span>
+    <span>01 / 32</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S2 · СОДЕРЖАНИЕ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="02 Содержание">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:48px;">
+    <div class="kicker">Навигация по документу</div>
+    <div class="h1" style="max-width:1600px; font-size:104px;">СОДЕРЖАНИЕ · <span class="red">15 БЛОКОВ.</span></div>
+
+    <div class="fill" style="display:grid; grid-template-columns:1fr 1fr; gap:0 96px; align-content:start; margin-top:8px;">
+      <ol class="numlist" style="gap:6px;">
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">01</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Суть задания</span><div class="dim" style="margin-top:2px; font-size:15px;">контекст и вызов</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">02</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">NSM и бизнес-эффект</span><div class="dim" style="margin-top:2px; font-size:15px;">North Star Metric и дерево метрик</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">03</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Диагностика утечек</span><div class="dim" style="margin-top:2px; font-size:15px;">growth equation, проблемы</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">04</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Целевой паттерн</span><div class="dim" style="margin-top:2px; font-size:15px;">4 стратегических инициативы H1</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">05</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Эксперименты</span><div class="dim" style="margin-top:2px; font-size:15px;">A/B-дизайн, MDE, предохранители</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">06</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Экономика</span><div class="dim" style="margin-top:2px; font-size:15px;">модель вклада и юнит-экономика</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr; border-bottom:none;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">07</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Roadmap</span><div class="dim" style="margin-top:2px; font-size:15px;">H1 → H2 → H3 (0–36 мес.)</div></span></li>
+      </ol>
+      <ol class="numlist" start="8" style="gap:6px;">
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">08</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Operating Model</span><div class="dim" style="margin-top:2px; font-size:15px;">владельцы, RACI, ритмы</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">09</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Метрики и плейбуки</span><div class="dim" style="margin-top:2px; font-size:15px;">KPI × владельцы × MDE</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">10</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">C-level дашборд</span><div class="dim" style="margin-top:2px; font-size:15px;">пять блоков для решения</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">11</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Риски и План Б</span><div class="dim" style="margin-top:2px; font-size:15px;">авто-стопы</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">12</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Что нужно от компании</span><div class="dim" style="margin-top:2px; font-size:15px;">данные, решения, next steps</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">13</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Приложение A · UX-спеки</span><div class="dim" style="margin-top:2px; font-size:15px;">4 инициативы в деталях</div></span></li>
+        <li style="padding-bottom:8px; grid-template-columns:64px 1fr; border-bottom:none;"><span class="num" style="font-family:var(--f-disp); font-weight:700; font-size:34px; color:var(--red); line-height:1;">14</span><span><span style="font-family:var(--f-sans); font-weight:600; font-size:20px; line-height:1.15;">Приложение B · Research</span><div class="dim" style="margin-top:2px; font-size:15px;">бенчмарки и data ready</div></span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="foot"><span></span><span>02 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S3 · TL;DR
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="03 TL;DR">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="parallelo" style="right:-220px; top:-100px; width:380px; height:700px; transform:skewX(-12deg); opacity:0.6;"></div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:40px;">
+    <div class="row gap-24" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">TL;DR для CEO / CPO</div>
+        <div class="h1" style="margin-top:18px;">КУДА И <span class="red">КАК.</span></div>
+      </div>
+      <span class="pill light-bg">TL;DR</span>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1fr 1.4fr; gap:48px; flex:1 1 auto;">
+      <!-- left: hero stat -->
+      <div class="card" style="background:var(--red); color:#FFF; display:flex; flex-direction:column; justify-content:space-between; padding:48px; position:relative; overflow:hidden;">
+        <div>
+          <div class="eyebrow" style="color:rgba(255,255,255,0.7);">Куда идём · NSM = MBC</div>
+          <div class="bigstat num" style="margin-top:24px; font-size:200px;">1<span style="color:rgba(255,255,255,0.55);">%</span><br/><span class="arrow" style="color:rgba(255,255,255,0.85); font-size:0.55em;">→</span> 20<span style="font-size:0.7em;">%+</span></div>
+        </div>
+        <div class="body-sm" style="color:rgba(255,255,255,0.92); max-width:480px; margin-top:24px;">
+          Доля покупателей Магнит Маркет в OMNI MAU.<br/>
+          Ступени: <strong>3% (12 мес) → 10% (36 мес) → 20%+</strong> — без «заливки» скидками.
+        </div>
+        <div class="stripes" style="position:absolute; right:-40px; bottom:-40px; width:280px; height:280px; color:rgba(255,255,255,0.18);"></div>
+      </div>
+
+      <!-- right: 5 thesis -->
+      <div class="col gap-16">
+        <div class="eyebrow">Пять тезисов</div>
+        <div class="numlist" style="display:flex; flex-direction:column; gap:14px;">
+          <div class="row gap-24" style="border-bottom:1px solid var(--hair); padding-bottom:14px; align-items:baseline;">
+            <span class="num" style="font-size:38px; font-weight:700; color:var(--red); width:60px;">01</span>
+            <div><div class="h5" style="font-size:26px;">Уравнение роста</div><div class="body-sm dim">MBC = Exposure × CTR × Intent × ATC × Checkout. Главная метрика (NSM) — MBC.</div></div>
+          </div>
+          <div class="row gap-24" style="border-bottom:1px solid var(--hair); padding-bottom:14px; align-items:baseline;">
+            <span class="num" style="font-size:38px; font-weight:700; color:var(--red); width:60px;">02</span>
+            <div><div class="h5" style="font-size:26px;">4 инициативы H1</div><div class="body-sm dim">Единый вход в покупки. Быстрое добавление в списке. Мост для смешанных корзин. Виджет статусов и претензии в один клик.</div></div>
+          </div>
+          <div class="row gap-24" style="border-bottom:1px solid var(--hair); padding-bottom:14px; align-items:baseline;">
+            <span class="num" style="font-size:38px; font-weight:700; color:var(--red); width:60px;">03</span>
+            <div><div class="h5" style="font-size:26px;">Измеримость</div><div class="body-sm dim">Каждая инициатива — A/B-тест. MDE рассчитан, группы сбалансированы, предохранители на сервис и экономику.</div></div>
+          </div>
+          <div class="row gap-24" style="border-bottom:1px solid var(--hair); padding-bottom:14px; align-items:baseline;">
+            <span class="num" style="font-size:38px; font-weight:700; color:var(--red); width:60px;">04</span>
+            <div><div class="h5" style="font-size:26px;">Экономика</div><div class="body-sm dim">Маржа на заказ ≥ 0 на доставке и самовывозе. Контролируем долю минусовых позиций. Не заливаем скидками.</div></div>
+          </div>
+          <div class="row gap-24" style="padding-bottom:8px; align-items:baseline;">
+            <span class="num" style="font-size:38px; font-weight:700; color:var(--red); width:60px;">05</span>
+            <div><div class="h5" style="font-size:26px;">План Б</div><div class="body-sm dim">Маржа отрицательна — авто-капы скидок. Сроки доставки падают — ограничение слотов. Смешанные корзины рвутся — «мост» принудительно.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span></span><span>03 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S4 · КОНТЕКСТ И ВЫЗОВ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="04 Контекст">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:32px;">
+    <div class="kicker">01 · Суть задания</div>
+    <div class="h1" style="max-width:1600px;">КОНТЕКСТ <br/>И <span class="red">ВЫЗОВ.</span></div>
+
+    <!-- big stats row, parallelograms in background -->
+    <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:0; margin-top:8px; position:relative; height:280px;">
+      <!-- 6 parallelograms with stats -->
+      <div class="parallelo" style="position:relative; left:0; top:0; width:100%; height:100%; transform:skewX(-10deg); display:flex; flex-direction:column; justify-content:space-between; padding:28px 24px; color:#FFF; border-radius:0;">
+        <div></div>
+        <div style="transform:skewX(10deg);"><div class="num" style="font-weight:800; font-size:72px; line-height:0.85;">~30</div><div class="h6" style="font-weight:700; margin-top:4px;">МЛН MAU</div><div class="body-xs" style="color:rgba(255,255,255,0.78); margin-top:6px;">OMNI месячная аудитория</div></div>
+      </div>
+      <div class="parallelo" style="position:relative; left:0; top:0; width:100%; height:100%; transform:skewX(-10deg); padding:28px 24px; color:#FFF; border-radius:0; display:flex; flex-direction:column; justify-content:space-between; opacity:0.96;">
+        <div></div>
+        <div style="transform:skewX(10deg);"><div class="num" style="font-weight:800; font-size:72px; line-height:0.85;">~15</div><div class="h6" style="font-weight:700; margin-top:4px;">МЛН</div><div class="body-xs" style="color:rgba(255,255,255,0.78); margin-top:6px;">доступов МагнитМаркет</div></div>
+      </div>
+      <div class="parallelo" style="position:relative; left:0; top:0; width:100%; height:100%; transform:skewX(-10deg); padding:28px 24px; color:#FFF; border-radius:0; display:flex; flex-direction:column; justify-content:space-between; opacity:0.92;">
+        <div></div>
+        <div style="transform:skewX(10deg);"><div class="num" style="font-weight:800; font-size:72px; line-height:0.85;">60+</div><div class="h6" style="font-weight:700; margin-top:4px;">МЛН</div><div class="body-xs" style="color:rgba(255,255,255,0.78); margin-top:6px;">офлайн-покупателей / мес</div></div>
+      </div>
+      <div class="parallelo" style="position:relative; left:0; top:0; width:100%; height:100%; transform:skewX(-10deg); padding:28px 24px; color:#FFF; border-radius:0; display:flex; flex-direction:column; justify-content:space-between; opacity:0.88;">
+        <div></div>
+        <div style="transform:skewX(10deg);"><div class="num" style="font-weight:800; font-size:72px; line-height:0.85;">1<span style="font-size:0.6em;">%</span></div><div class="h6" style="font-weight:700; margin-top:4px;">NSM сегодня</div><div class="body-xs" style="color:rgba(255,255,255,0.78); margin-top:6px;">OMNI → покупатели</div></div>
+      </div>
+      <div class="parallelo" style="position:relative; left:0; top:0; width:100%; height:100%; transform:skewX(-10deg); padding:28px 24px; color:#FFF; border-radius:0; display:flex; flex-direction:column; justify-content:space-between; opacity:0.84;">
+        <div></div>
+        <div style="transform:skewX(10deg);"><div class="num" style="font-weight:800; font-size:72px; line-height:0.85;">20<span style="font-size:0.6em;">%+</span></div><div class="h6" style="font-weight:700; margin-top:4px;">цель 24 мес</div><div class="body-xs" style="color:rgba(255,255,255,0.78); margin-top:6px;">долго­срочно — больше</div></div>
+      </div>
+      <div class="parallelo" style="position:relative; left:0; top:0; width:100%; height:100%; transform:skewX(-10deg); padding:28px 24px; color:#FFF; border-radius:0; display:flex; flex-direction:column; justify-content:space-between; opacity:0.78;">
+        <div></div>
+        <div style="transform:skewX(10deg);"><div class="num" style="font-weight:800; font-size:72px; line-height:0.85;">5</div><div class="h6" style="font-weight:700; margin-top:4px;">ЛЕТ</div><div class="body-xs" style="color:rgba(255,255,255,0.78); margin-top:6px;">стратегический горизонт</div></div>
+      </div>
+    </div>
+
+    <!-- three columns with content blocks -->
+    <div class="grid" style="grid-template-columns:1fr 1fr 1fr; gap:32px; margin-top:24px;">
+      <div class="card">
+        <div class="eyebrow red">Контекст</div>
+        <ul class="bullets" style="margin-top:16px;">
+          <li><strong>OMNI</strong> — ядро экосистемы (лояльность, каталог, доставка, игры).</li>
+          <li><strong>МагнитМаркет</strong> — отдельный апп и ин-апп модуль в OMNI.</li>
+          <li>Сегодняшняя конверсия <strong>OMNI → покупатели</strong> внутри ОМНИ — около&nbsp;1%.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="eyebrow red">Вызовы</div>
+        <ul class="bullets" style="margin-top:16px;">
+          <li>Недомонетизированный трафик OMNI — основной сценарий «показать карту».</li>
+          <li>Фрагментация CJM OMNI ↔ Маркет: нет единого окна (корзина / поиск / история).</li>
+          <li>Ассоциация «Магнит» = офлайн «у дома» — привычки против.</li>
+        </ul>
+      </div>
+      <div class="card" style="background:var(--red); color:#FFF;">
+        <div class="eyebrow" style="color:rgba(255,255,255,0.7);">Задача Lead E-com</div>
+        <div class="h4" style="margin-top:18px; color:#FFF;">2 года — 1% → 20%.</div>
+        <div class="body-sm" style="color:rgba(255,255,255,0.92); margin-top:14px;">
+          5 лет — сделать покупку в МагнитМаркет такой же привычной, как поход в офлайн-магазин у дома.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span></span><span>04 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S5 · NSM И ДЕРЕВО МЕТРИК
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="05 NSM">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:32px;">
+    <div class="row" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">02 · NSM и бизнес-эффект</div>
+        <div class="h1" style="margin-top:16px;">NORTH STAR <br/><span class="red">METRIC.</span></div>
+      </div>
+      <div class="card outline" style="padding:24px 32px;">
+        <div class="eyebrow red">Определение NSM</div>
+        <div class="h5 mono" style="font-size:22px; margin-top:12px; line-height:1.5;">
+          MBC = <span class="red">покупатели OMNI / OMNI MAU</span><br/>
+          <span class="dim" style="font-size:18px;">за календарный месяц, ≥1 заказ из OMNI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- equation -->
+    <div class="card" style="background:var(--bg-2); padding:32px 48px;">
+      <div class="eyebrow">Уравнение роста</div>
+      <div class="h2 mono" style="margin-top:10px; font-family:var(--f-disp); font-size:56px; line-height:1.05; letter-spacing:-0.02em;">
+        MBC = <span class="red">Exposure</span> × <span class="red">CTR</span> × <span class="red">Intent</span> × <span class="red">ATC</span> × <span class="red">Checkout</span>
+      </div>
+      <div class="h5 mono dim" style="margin-top:12px; font-size:22px;">MDC (исполненные покупатели) = MBC × Fulfillment&nbsp;&nbsp;<span class="dim" style="font-size:18px;">— контроль сервиса и повторов</span></div>
+    </div>
+
+    <!-- 3 metric trees -->
+    <div class="grid" style="grid-template-columns:1fr 1fr 1fr; gap:24px; flex:1 1 auto;">
+      <div class="card">
+        <div class="eyebrow red">Рост · еженедельно</div>
+        <ul class="bullets" style="margin-top:16px;">
+          <li><strong>Видят вход</strong> · доля MAU, заметивших точку входа</li>
+          <li><strong>Кликают</strong> · переходят в Маркет</li>
+          <li><strong>Выбирают получение</strong> · доставка или самовывоз</li>
+          <li><strong>Добавляют в корзину</strong> · хотя бы один товар</li>
+          <li><strong>Оплачивают и получают в срок</strong> · стык продажи и сервиса</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="eyebrow red">Процесс · предохранители</div>
+        <ul class="bullets" style="margin-top:16px;">
+          <li><strong>Платежи проходят</strong> · доля успешных, без всплесков отказов</li>
+          <li><strong>Доставка в срок</strong> · в обещанное окно</li>
+          <li><strong>Замены подтверждены</strong> · клиент видит и соглашается</li>
+          <li><strong>Группы A/B сбалансированы</strong> · SRM = 0 — пропуск к чтению</li>
+          <li><strong>Без падений и подвисаний</strong> · не хуже базы</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="eyebrow red">Итоговые · месяц/квартал</div>
+        <ul class="bullets" style="margin-top:16px;">
+          <li><strong>Первый онлайн-заказ</strong> · кто впервые купил в Маркете</li>
+          <li><strong>Возврат за 30 и 90 дней</strong> · кто пришёл повторно</li>
+          <li><strong>Средний чек</strong> · взвешенный, доставка vs самовывоз</li>
+          <li><strong>Окупаемость клиента</strong> · LTV / CAC ≥ 3</li>
+          <li><strong>NPS и CSAT</strong> · что говорят о Маркете</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- bottom: how we go 3% → 5% → 10% → 20% — removed (duplicated on TL;DR) -->
+  </div>
+
+  <div class="foot"><span></span><span>05 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S6 · GROWTH EQUATION И ДИАГНОСТИКА
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="06 Growth equation">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:32px;">
+    <div class="kicker">02 · Growth equation</div>
+    <div class="h1" style="max-width:1600px;">ГДЕ И ПОЧЕМУ <br/><span class="red">ТЕРЯЕМ.</span></div>
+
+    <!-- 6-step funnel -->
+    <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin-top:8px;">
+      <div class="card outline" style="padding:24px; text-align:left;">
+        <span class="num" style="font-size:28px; font-weight:700; color:var(--red);">01</span>
+        <div class="h6" style="margin-top:8px;">Exposure</div>
+        <div class="body-xs" style="margin-top:4px;">Views</div>
+      </div>
+      <div class="card outline" style="padding:24px;">
+        <span class="num" style="font-size:28px; font-weight:700; color:var(--red);">02</span>
+        <div class="h6" style="margin-top:8px;">CTR</div>
+        <div class="body-xs" style="margin-top:4px;">клики входов</div>
+      </div>
+      <div class="card outline" style="padding:24px;">
+        <span class="num" style="font-size:28px; font-weight:700; color:var(--red);">03</span>
+        <div class="h6" style="margin-top:8px;">Intent</div>
+        <div class="body-xs" style="margin-top:4px;">способ получения</div>
+      </div>
+      <div class="card outline" style="padding:24px;">
+        <span class="num" style="font-size:28px; font-weight:700; color:var(--red);">04</span>
+        <div class="h6" style="margin-top:8px;">ATC</div>
+        <div class="body-xs" style="margin-top:4px;">в корзину</div>
+      </div>
+      <div class="card outline" style="padding:24px;">
+        <span class="num" style="font-size:28px; font-weight:700; color:var(--red);">05</span>
+        <div class="h6" style="margin-top:8px;">Checkout</div>
+        <div class="body-xs" style="margin-top:4px;">оплачен</div>
+      </div>
+      <div class="card" style="background:var(--red); color:#FFF; padding:24px;">
+        <span class="num" style="font-size:28px; font-weight:700; color:rgba(255,255,255,0.7);">06</span>
+        <div class="h6" style="margin-top:8px; color:#FFF;">Fulfillment</div>
+        <div class="body-xs" style="margin-top:4px; color:rgba(255,255,255,0.85);">в SLA → MDC</div>
+      </div>
+    </div>
+
+    <!-- 4 leakage points -->
+    <div class="grid" style="grid-template-columns:repeat(4,1fr); gap:24px; flex:1 1 auto;">
+      <div class="card" style="display:flex; flex-direction:column; gap:14px;">
+        <span class="pill solid">ранг 1</span>
+        <div class="h5" style="font-size:26px;">Навигация и «две корзины»</div>
+        <div class="body-sm">Два сценария в одном приложении с разными корзинами. Маркет «ниже сгиба», поэтому ложные заходы, а на финале смешанные корзины рвутся.</div>
+        <div class="body-xs mono" style="margin-top:auto; color:var(--red);">→ Exposure · CTR · Checkout</div>
+      </div>
+      <div class="card" style="display:flex; flex-direction:column; gap:14px;">
+        <span class="pill solid">ранг 2</span>
+        <div class="h5" style="font-size:26px;">Лишний клик до ATC</div>
+        <div class="body-sm">В списке товаров нет кнопки «+» — даже простой товар без вариантов требует открыть карточку. Импульс гаснет, повтор страдает.</div>
+        <div class="body-xs mono" style="margin-top:auto; color:var(--red);">→ ATC CVR · ATC latency</div>
+      </div>
+      <div class="card" style="display:flex; flex-direction:column; gap:14px;">
+        <span class="pill solid">ранг 3</span>
+        <div class="h5" style="font-size:26px;">Смешанные корзины</div>
+        <div class="body-sm">Проблема не в платежах, а в структуре: разные источники → разные правила оформления. Без «моста» — потеря контекста.</div>
+        <div class="body-xs mono" style="margin-top:auto; color:var(--red);">→ Checkout CVR mixed</div>
+      </div>
+      <div class="card" style="display:flex; flex-direction:column; gap:14px;">
+        <span class="pill solid">ранг 4</span>
+        <div class="h5" style="font-size:26px;">Боли после покупки</div>
+        <div class="body-sm">Задержки, недовложения, возвраты в Маркете рвут связь между «купил» и «получил». NPS и повтор падают.</div>
+        <div class="body-xs mono" style="margin-top:auto; color:var(--red);">→ Fulfillment · Repeat</div>
+      </div>
+    </div>
+
+    <!-- aMAU formula -->
+    <div class="card outline" style="padding:24px 32px; margin-top:0;">
+      <div class="row gap-32" style="align-items:center; justify-content:space-between;">
+        <span class="eyebrow red">Адресуемая аудитория · считаем абсолюты без ошибки «MAU = покупатели»</span>
+        <div class="h5 mono" style="font-size:22px;">aMAU = OMNI_MAU × Availability × Eligibility × Exposure_seen</div>
+        <div class="h5 mono dim" style="font-size:20px;">ΔBuyers = aMAU × ΔMBC</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span></span><span>06 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S7 · МЕТОД СБОРА И ТОП-ПРОБЛЕМЫ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="07 Метод">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:32px;">
+    <div class="kicker">03 · Метод сбора</div>
+    <div class="h1 tight" style="max-width:1600px;">ОТКУДА МЫ <span class="red">УЗНАЛИ.</span></div>
+
+    <!-- methodology cards -->
+    <div class="grid" style="grid-template-columns:repeat(4,1fr); gap:24px;">
+      <div class="card">
+        <div class="num" style="font-size:80px; font-weight:800; color:var(--red); line-height:0.9;">665</div>
+        <div class="h5" style="font-size:22px; margin-top:12px;">Отзывов</div>
+        <div class="body-sm dim" style="margin-top:8px;">Магнит — 372 · Маркет — 293. Сторы приложений + сайты-отзовики.</div>
+      </div>
+      <div class="card">
+        <div class="num" style="font-size:80px; font-weight:800; color:var(--red); line-height:0.9;">UX</div>
+        <div class="h5" style="font-size:22px; margin-top:12px;">Аудит</div>
+        <div class="body-sm dim" style="margin-top:8px;">Главная · поиск · PLP/PDP · обе корзины · checkout · post-purchase. iOS, авторизованная сессия.</div>
+      </div>
+      <div class="card">
+        <div class="num" style="font-size:80px; font-weight:800; color:var(--red); line-height:0.9;">PR</div>
+        <div class="h5" style="font-size:22px; margin-top:12px;">Открытые источники</div>
+        <div class="body-sm dim" style="margin-top:8px;">СМИ, отчёты АКИТ и Data Insight, публичные коммуникации Магнита.</div>
+      </div>
+      <div class="card">
+        <div class="num" style="font-size:80px; font-weight:800; color:var(--red); line-height:0.9;">RF</div>
+        <div class="h5" style="font-size:22px; margin-top:12px;">Рамки</div>
+        <div class="body-sm dim" style="margin-top:8px;">Локация — Москва. Флоу до оплаты. Кластеризация через Perplexity. Без доступа к post-purchase.</div>
+      </div>
+    </div>
+
+    <!-- mapping to growth equation -->
+    <div class="grid" style="grid-template-columns:1fr 1fr; gap:48px; flex:1 1 auto;">
+      <div>
+        <div class="eyebrow red">Привязка к уравнению роста</div>
+        <table class="tab" style="margin-top:16px;">
+          <thead><tr><th>Категория сигналов</th><th>Шаг воронки</th></tr></thead>
+          <tbody>
+            <tr><td>Доверие и надёжность</td><td class="mono red">Views · CTR</td></tr>
+            <tr><td>Поиск и добавление</td><td class="mono red">ATC CVR · ATC latency</td></tr>
+            <tr><td>Оплата и авторизация</td><td class="mono red">Checkout CVR · Pay-success</td></tr>
+            <tr><td style="border-bottom:none;">Доставка и сервис</td><td class="mono red" style="border-bottom:none;">Delivered · On-time · Repeat</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="eyebrow red">Три подтверждённых корня</div>
+        <ul class="numlist" style="margin-top:16px;">
+          <li><span class="num n">01</span><span><strong class="h5" style="font-size:24px;">Навигация и две корзины</strong> <div class="body-sm dim">бьёт по показам, кликам и оплате</div></span></li>
+          <li><span class="num n">02</span><span><strong class="h5" style="font-size:24px;">Нет быстрого добавления из списка</strong> <div class="body-sm dim">режет конверсию в корзину</div></span></li>
+          <li><span class="num n">03</span><span><strong class="h5" style="font-size:24px;">Боли после покупки в Маркете</strong> <div class="body-sm dim">режет доставку и повтор</div></span></li>
+        </ul>
+        <div class="body-xs" style="margin-top:18px; color:var(--ink-3);">
+          Гипотеза «барьер на способе получения» <strong style="color:var(--red);">отвергнута</strong> — товар можно класть без адреса и слота.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span></span><span>07 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S8 · КАРТА ПРОБЛЕМ ПО ВОРОНКЕ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="08 Карта проблем">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="row" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">03 · Диагностика</div>
+        <div class="h1" style="margin-top:14px;">КАРТА <span class="red">ПРОБЛЕМ.</span></div>
+      </div>
+      <div class="body-sm dim" style="max-width:560px;">
+        Где именно рвётся путь к покупке в OMNI→Маркет и какой шаг воронки страдает — на основе 665 сигналов и UX-аудита.
+      </div>
+    </div>
+
+    <table class="tab" style="margin-top:8px;">
+      <thead>
+        <tr>
+          <th style="width:60px;">№</th>
+          <th style="width:300px;">Шаг воронки</th>
+          <th style="width:480px;">Что не так</th>
+          <th style="width:340px;">Сигналы из отзывов</th>
+          <th>Метрика-мишень</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="num" style="color:var(--red); font-size:36px; font-weight:700;">1</span></td>
+          <td><div class="h5" style="font-size:22px;">Exposure → CTR</div><div class="body-xs dim">входы и понятность пути</div></td>
+          <td>Две корзины в одном приложении, Market «ниже сгиба», поиск ведёт в разные миры.</td>
+          <td><strong class="red num">273</strong> упоминаний (Магнит, Trust)<br/><strong class="red num">90</strong> упоминаний (Маркет, Exposure)</td>
+          <td class="mono">Share_exposed · CTR входов · Mixed-cart rate</td>
+        </tr>
+        <tr>
+          <td><span class="num" style="color:var(--red); font-size:36px; font-weight:700;">2</span></td>
+          <td><div class="h5" style="font-size:22px;">ATC</div><div class="body-xs dim">добавление в корзину</div></td>
+          <td>Нет быстрого «+» на PLP даже для безатрибутных SKU — обязательный заход в PDP, длинный путь.</td>
+          <td>Косвенно — UX-аудит. Жалобы на «медленность / сложность» пути к покупке.</td>
+          <td class="mono">ATC CVR · ATC latency · ATC/Session · AOV</td>
+        </tr>
+        <tr>
+          <td><span class="num" style="color:var(--red); font-size:36px; font-weight:700;">3</span></td>
+          <td><div class="h5" style="font-size:22px;">Checkout (mixed)</div><div class="body-xs dim">структурное трение</div></td>
+          <td>Разные источники → разные правила. Без «моста» теряется контекст.</td>
+          <td><strong class="red num">35</strong> упоминаний (Магнит, Auth/SMS)<br/><strong class="red num">22</strong> упоминания (Маркет, Payments)</td>
+          <td class="mono">Checkout CVR mixed · Drop@Mixed · Pay-success</td>
+        </tr>
+        <tr>
+          <td style="border-bottom:none;"><span class="num" style="color:var(--red); font-size:36px; font-weight:700;">4</span></td>
+          <td style="border-bottom:none;"><div class="h5" style="font-size:22px;">Fulfillment → Repeat</div><div class="body-xs dim">после оплаты</div></td>
+          <td style="border-bottom:none;">Задержки &gt; 1 дня, недовложения, медленные возвраты. Доверие падает, повтор не случается.</td>
+          <td style="border-bottom:none;"><strong class="red num">156</strong> упоминаний (Маркет, Fulfillment)<br/><strong class="red num">42</strong> упоминания (Магнит, доставка)</td>
+          <td style="border-bottom:none;" class="mono">Delivered-success · On-time · Contact rate · Repeat 30/90d</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="foot"><span></span><span>08 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S9 · ТОП-ПРОБЛЕМЫ ПОЛЬЗОВАТЕЛЕЙ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="09 Top problems">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">03 · Голос пользователя</div>
+    <div class="h1" style="max-width:1700px;">ТОП-5 БОЛЕЙ <br/><span class="red">ПОЛЬЗОВАТЕЛЕЙ.</span></div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr; gap:48px; flex:1 1 auto; margin-top:16px;">
+      <div>
+        <div class="row gap-16" style="align-items:baseline;">
+          <span class="pill light-bg">Магнит</span>
+          <span class="body-sm dim mono">372 отзыва</span>
+        </div>
+        <div class="col gap-16" style="margin-top:24px;">
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--hair);">
+            <div><div class="h5" style="font-size:24px;">Технические сбои и зависания</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; position:relative; border-radius:2px;"><div style="height:100%; background:var(--red); width:100%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">65</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--hair);">
+            <div><div class="h5" style="font-size:24px;">Списание бонусов</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; border-radius:2px;"><div style="height:100%; background:var(--red); width:80%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">52</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--hair);">
+            <div><div class="h5" style="font-size:24px;">QR-код карты не работает</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; border-radius:2px;"><div style="height:100%; background:var(--red); width:74%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">48</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--hair);">
+            <div><div class="h5" style="font-size:24px;">Доставка: долгие сроки / отмены</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; border-radius:2px;"><div style="height:100%; background:var(--red); width:65%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">42</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center;">
+            <div><div class="h5" style="font-size:24px;">Ошибки в истории покупок</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; border-radius:2px;"><div style="height:100%; background:var(--red); width:34%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">22</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row gap-16" style="align-items:baseline;">
+          <span class="pill solid">Магнит Маркет</span>
+          <span class="body-sm dim mono">293 отзыва</span>
+        </div>
+        <div class="col gap-16" style="margin-top:24px;">
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--hair);">
+            <div><div class="h5" style="font-size:24px;">Возвраты и деньги</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; border-radius:2px;"><div style="height:100%; background:var(--red); width:100%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">45</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--hair);">
+            <div><div class="h5" style="font-size:24px;">Неправильная сборка / недовложения</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; border-radius:2px;"><div style="height:100%; background:var(--red); width:84%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">38</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--hair);">
+            <div><div class="h5" style="font-size:24px;">Задержки доставки &gt; 1 дня</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; border-radius:2px;"><div style="height:100%; background:var(--red); width:78%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">35</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--hair);">
+            <div><div class="h5" style="font-size:24px;">Блокировка негативных отзывов</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; border-radius:2px;"><div style="height:100%; background:var(--red); width:71%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">32</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 80px; gap:16px; align-items:center;">
+            <div><div class="h5" style="font-size:24px;">Неработающая служба поддержки</div>
+              <div style="height:10px; background:rgba(238,16,36,0.18); margin-top:8px; border-radius:2px;"><div style="height:100%; background:var(--red); width:66%; border-radius:2px;"></div></div></div>
+            <div class="num red" style="font-size:46px; font-weight:800; text-align:right;">30</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-xs dim" style="border-top:1px solid var(--hair); padding-top:18px;">
+      «Магнит» — доминируют темы доверия и надёжности; они бьют по показам и кликам. «Магнит Маркет» — боли после покупки: сервис и доставка рвут повтор и NPS, заказ есть, а получения нет.
+    </div>
+  </div>
+
+  <div class="foot"><span></span><span>09 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S10 · ДИАГНОЗ И ПРИОРИТИЗАЦИЯ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="10 Диагноз">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="row" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">03 · Приоритизация</div>
+        <div class="h1" style="margin-top:14px;">ЧЕТЫРЕ <span class="red">УЗЛА.</span></div>
+      </div>
+      <div class="body-sm dim" style="max-width:620px;">
+        Фокусируем усилия там, где максимальный мультипликатор к&nbsp;NSM = MBC, и фиксируем, что НЕ&nbsp;является приоритетом сейчас.
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:repeat(4, 1fr); gap:24px; flex:1 1 auto; margin-top:8px;">
+      <!-- Rank 1 -->
+      <div class="card" style="background:var(--red); color:#FFF; display:flex; flex-direction:column; gap:18px; padding:36px;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <span class="num" style="font-size:80px; font-weight:800; line-height:0.85; color:#FFF;">01</span>
+          <span class="pill light-bg">Ранг&nbsp;1</span>
+        </div>
+        <div class="h4" style="color:#FFF; font-size:36px;">Навигация и две корзины</div>
+        <div class="body-sm" style="color:rgba(255,255,255,0.92);">Доля смешанных корзин растёт, Маркет «ниже сгиба», выбор сложный — отличия между источниками не объяснены.</div>
+        <div style="margin-top:auto; border-top:1px solid rgba(255,255,255,0.25); padding-top:14px;">
+          <div class="body-xs mono" style="color:rgba(255,255,255,0.85);">Сигналы</div>
+          <div class="h5" style="color:#FFF; font-size:22px; margin-top:4px;">273 / 90 упоминаний</div>
+          <div class="body-xs mono" style="color:rgba(255,255,255,0.85); margin-top:10px;">→ Exposure · CTR · Checkout</div>
+        </div>
+      </div>
+      <!-- Rank 2 -->
+      <div class="card" style="display:flex; flex-direction:column; gap:18px; padding:36px;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <span class="num red" style="font-size:80px; font-weight:800; line-height:0.85;">02</span>
+          <span class="pill">Ранг&nbsp;2</span>
+        </div>
+        <div class="h4" style="font-size:36px;">Лишний клик до ATC</div>
+        <div class="body-sm">PLP без «+» убирает импульс. Долгий time-to-first-ATC, меньше повторов.</div>
+        <div style="margin-top:auto; border-top:1px solid var(--hair); padding-top:14px;">
+          <div class="body-xs mono dim">Подтверждено</div>
+          <div class="h5" style="font-size:22px; margin-top:4px;">UX-аудитом</div>
+          <div class="body-xs mono red" style="margin-top:10px;">→ ATC CVR · ATC latency · AOV</div>
+        </div>
+      </div>
+      <!-- Rank 3 -->
+      <div class="card" style="display:flex; flex-direction:column; gap:18px; padding:36px;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <span class="num red" style="font-size:80px; font-weight:800; line-height:0.85;">03</span>
+          <span class="pill">Ранг&nbsp;3</span>
+        </div>
+        <div class="h4" style="font-size:36px;">Смешанные корзины</div>
+        <div class="body-sm">Структура, не платежи. Разные источники → разные правила. Без «моста» — дроп.</div>
+        <div style="margin-top:auto; border-top:1px solid var(--hair); padding-top:14px;">
+          <div class="body-xs mono dim">Сигнал</div>
+          <div class="h5" style="font-size:22px; margin-top:4px;">Логический пик</div>
+          <div class="body-xs mono red" style="margin-top:10px;">→ Checkout CVR mixed</div>
+        </div>
+      </div>
+      <!-- Rank 4 -->
+      <div class="card" style="display:flex; flex-direction:column; gap:18px; padding:36px;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <span class="num red" style="font-size:80px; font-weight:800; line-height:0.85;">04</span>
+          <span class="pill">Ранг&nbsp;4</span>
+        </div>
+        <div class="h4" style="font-size:36px;">Post-purchase боли</div>
+        <div class="body-sm">Задержки, недовложения, возвраты — разрыв MBC → MDC, повтор не возникает.</div>
+        <div style="margin-top:auto; border-top:1px solid var(--hair); padding-top:14px;">
+          <div class="body-xs mono dim">Сигналы</div>
+          <div class="h5" style="font-size:22px; margin-top:4px;">156 / 42 упоминания</div>
+          <div class="body-xs mono red" style="margin-top:10px;">→ Fulfillment · Repeat 30/90d</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Not in focus -->
+    <div class="row gap-32" style="align-items:center; padding:20px 32px; border:1px dashed var(--hair-2); border-radius:18px;">
+      <span class="eyebrow red">Не в фокусе сейчас</span>
+      <div class="body-sm dim" style="flex:1;">
+        <strong style="color:var(--ink);">Intent-барьер</strong> — отсутствует (можно класть без адреса/слота). &nbsp;·&nbsp;
+        <strong style="color:var(--ink);">1-тап / 3-DS</strong> — не подтверждены массово. &nbsp;·&nbsp;
+        <strong style="color:var(--ink);">Замены</strong> — наблюдаем, но не штурмуем.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span></span><span>10 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S11 · 4 СТРАТЕГИЧЕСКИЕ ИНИЦИАТИВЫ H1
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="11 4 инициативы H1">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+  <div class="parallelo" style="right:-260px; top:80px; width:520px; height:780px; transform:skewX(-12deg); opacity:0.18;"></div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:28px;">
+    <div class="row" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">04 · Целевой паттерн · H1 (0–8 недель)</div>
+        <div class="h1 tight" style="margin-top:14px;">ЧЕТЫРЕ <span class="red">ИНИЦИАТИВЫ.</span></div>
+      </div>
+      <div class="body-sm dim" style="max-width:680px;">
+        Закрываем подтверждённые утечки и мультипликативно растим NSM = MBC. Без ухудшения экономики и сервиса.
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:repeat(4, 1fr); gap:24px; flex:1 1 auto;">
+      <div class="card" style="display:flex; flex-direction:column; gap:18px; padding:36px;">
+        <div class="num red" style="font-size:96px; font-weight:800; line-height:0.85;">01</div>
+        <div class="h4" style="font-size:32px;">Единый вход в покупки</div>
+        <div class="body-sm">На главной одна кнопка «Покупки» с двумя табами — «Из магазина» и «Маркет». На карточках помечаем источник. Витрины Маркета поднимаем выше сгиба.</div>
+        <hr class="rule" />
+        <div>
+          <div class="eyebrow red">Основной KPI · MDE</div>
+          <div class="h5 mono" style="margin-top:8px; font-size:20px;">Views +15–20 п.п.<br/>CTR +0.3–0.5 п.п.</div>
+        </div>
+        <div class="body-xs mono dim" style="margin-top:auto;">Platform &amp; CX · 14 дней</div>
+      </div>
+
+      <div class="card" style="display:flex; flex-direction:column; gap:18px; padding:36px;">
+        <div class="num red" style="font-size:96px; font-weight:800; line-height:0.85;">02</div>
+        <div class="h4" style="font-size:32px;">Быстрый ATC и повтор</div>
+        <div class="body-sm">Кнопка «+» в списке для простых товаров. Компактный селектор для товаров с вариантами. Мультивыбор. Блоки «Мои 20» и «Покупай снова» — первым экраном.</div>
+        <hr class="rule" />
+        <div>
+          <div class="eyebrow red">Основной KPI · MDE</div>
+          <div class="h5 mono" style="margin-top:8px; font-size:20px;">ATC +1–2 п.п.<br/>AOV +8–12%</div>
+        </div>
+        <div class="body-xs mono dim" style="margin-top:auto;">Browse &amp; Merch · 21 день</div>
+      </div>
+
+      <div class="card" style="display:flex; flex-direction:column; gap:18px; padding:36px;">
+        <div class="num red" style="font-size:96px; font-weight:800; line-height:0.85;">03</div>
+        <div class="h4" style="font-size:32px;">Мост для mixed-cart</div>
+        <div class="body-sm">Инфо-бар «2 источника» и кнопка «оформить отдельно» — две оплаты подряд без потери контекста. Бонусы и идентичность общие.</div>
+        <hr class="rule" />
+        <div>
+          <div class="eyebrow red">Основной KPI · MDE</div>
+          <div class="h5 mono" style="margin-top:8px; font-size:20px;">Checkout (mixed)<br/>+3–5 п.п.</div>
+        </div>
+        <div class="body-xs mono dim" style="margin-top:auto;">Checkout · 21–28 дней</div>
+      </div>
+
+      <div class="card" style="background:var(--red); color:#FFF; display:flex; flex-direction:column; gap:18px; padding:36px;">
+        <div class="num" style="font-size:96px; font-weight:800; line-height:0.85; color:#FFF;">04</div>
+        <div class="h4" style="font-size:32px; color:#FFF;">Прозрачность после покупки</div>
+        <div class="body-sm" style="color:rgba(255,255,255,0.92);">Виджет статусов и расчётного времени, шаблоны уведомлений. Претензия и возврат в один клик. Отслеживаем закрытие обращений.</div>
+        <hr class="rule" style="border-color:rgba(255,255,255,0.25);" />
+        <div>
+          <div class="eyebrow" style="color:rgba(255,255,255,0.7);">Основной KPI · MDE</div>
+          <div class="h5 mono" style="margin-top:8px; font-size:20px; color:#FFF;">Delivered +2–3 п.п.<br/>On-time +Y п.п.</div>
+        </div>
+        <div class="body-xs mono" style="color:rgba(255,255,255,0.75); margin-top:auto;">Logistics &amp; Promise · 28–42 дня</div>
+      </div>
+    </div>
+
+    <div class="row gap-32" style="align-items:center; padding:14px 28px; background:var(--bg-2); border-radius:14px;">
+      <span class="eyebrow red">Связь с уравнением роста</span>
+      <div class="row gap-24" style="flex:1; justify-content:space-between;">
+        <div style="white-space:nowrap;"><span class="num red" style="font-weight:700;">01</span> <span class="body-sm" style="font-size:18px;">→ Exposure · CTR</span></div>
+        <div style="white-space:nowrap;"><span class="num red" style="font-weight:700;">02</span> <span class="body-sm" style="font-size:18px;">→ ATC · AOV</span></div>
+        <div style="white-space:nowrap;"><span class="num red" style="font-weight:700;">03</span> <span class="body-sm" style="font-size:18px;">→ Checkout</span></div>
+        <div style="white-space:nowrap;"><span class="num red" style="font-weight:700;">04</span> <span class="body-sm" style="font-size:18px;">→ Fulfillment · MDC</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>11 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S12 · ЭКСПЕРИМЕНТАЛЬНЫЙ ПЛАН
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="12 Эксперимент-план">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">05 · Эксперименты</div>
+    <div class="h1 tight" style="max-width:1700px;">КАК ИЗМЕРЯЕМ <span class="red">ЭФФЕКТ.</span></div>
+
+    <div class="grid" style="grid-template-columns:1.4fr 1fr; gap:32px; flex:1 1 auto; margin-top:16px;">
+      <div class="card" style="padding:40px;">
+        <div class="eyebrow red">Принципы дизайна</div>
+        <ul class="bullets" style="margin-top:16px; gap:14px;">
+          <li><strong>Рандомизация по user_id</strong> — назначение не меняется между сессиями.</li>
+          <li><strong>Стандарт</strong> — α = 5%, мощность 80%, z-test для пропорций.</li>
+          <li><strong>Группы сбалансированы (SRM = 0)</strong> — обязательный гейт перед чтением.</li>
+          <li><strong>Размер выборки</strong> — n ≈ 16·p̄(1−p̄) / MDE² на группу.</li>
+          <li><strong>CUPED для устойчивости</strong> — если есть ковариаты; diff-in-diff для кластеров.</li>
+        </ul>
+
+        <hr class="rule" style="margin:24px 0;" />
+
+        <div class="eyebrow red">Guardrails — обязательны на каждом тесте</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
+          <ul class="bullets" style="gap:10px;">
+            <li>NPS / CSAT не хуже базы</li>
+            <li>Маржа на заказ ≥ 0 на доставке и самовывозе</li>
+            <li>Своевременность, отмены, возвраты — в норме</li>
+          </ul>
+          <ul class="bullets" style="gap:10px;">
+            <li>Доля «минусовых» по марже не растёт</li>
+            <li>Каннибализация офлайна — geo-holdouts ≤ K%</li>
+            <li>Стабильность приложения не хуже базы</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col gap-24">
+        <div class="card red" style="padding:32px;">
+          <div class="eyebrow" style="color:rgba(255,255,255,0.75);">Атрибуция к NSM</div>
+          <div class="h5 mono" style="margin-top:12px; color:#FFF; font-size:20px; line-height:1.5;">
+            ΔMBC = ΔExposure × CTR × Intent<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× ATC × Checkout + …<br/><br/>
+            MDC = MBC × Fulfillment
+          </div>
+        </div>
+        <div class="card" style="padding:32px;">
+          <div class="eyebrow red">Готовность к запуску</div>
+          <ul class="bullets" style="margin-top:14px; gap:10px;">
+            <li>События в проде — единые order_id / user_id / flow_id</li>
+            <li>Адресуемая аудитория по сегментам, успешность доставки по регионам</li>
+            <li>Средний чек и доля по категориям — отдельно доставка и самовывоз</li>
+            <li>Дашборд: NSM в окнах 1/7/28, шесть шагов воронки, предохранители, очередь A/B</li>
+            <li>Регламент: критерии остановки, откат, коммуникация</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- авто-стопы strip -->
+    <div style="padding:20px 32px; background:var(--bg-2); border-radius:14px;">
+      <div class="eyebrow red" style="margin-bottom:14px;">Авто-стопы</div>
+      <div class="grid" style="grid-template-columns:repeat(4, 1fr); gap:24px;">
+        <div><span class="body-sm" style="font-size:18px;"><strong class="red">Маржа &lt; 0</strong> → авто-капы скидок, порог бесплатной доставки, слоты</span></div>
+        <div><span class="body-sm" style="font-size:18px;"><strong class="red">Срывы доставки &gt; Y%</strong> → ограничение слотов и честный срок</span></div>
+        <div><span class="body-sm" style="font-size:18px;"><strong class="red">Отвал смешанных корзин ↑</strong> → «мост» принудительно</span></div>
+        <div><span class="body-sm" style="font-size:18px;"><strong class="red">Группы разъехались (SRM ≠ 0)</strong> → откат и пересборка</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>12 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S13 · 4 ИНИЦИАТИВЫ — ДЕТАЛЬНО (KPI MATRIX)
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="13 Инициативы детали">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">05 · 4 инициативы в деталях</div>
+    <div class="h2" style="max-width:1700px;">ДИЗАЙН ТЕСТОВ И <span class="red">ТОЧКИ РЕШЕНИЯ.</span></div>
+
+    <table class="tab" style="margin-top:16px;">
+      <thead>
+        <tr>
+          <th style="width:200px;">Инициатива</th>
+          <th style="width:280px;">Главное · MDE</th>
+          <th style="width:300px;">Доп. метрики и предохранители</th>
+          <th style="width:220px;">Дизайн</th>
+          <th>Если не получится — что делаем</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="h5" style="font-size:22px;">01 · Единый вход</div><div class="body-xs dim mono" style="margin-top:4px;">Platform &amp; CX</div></td>
+          <td><div class="mono red" style="font-size:18px;">Views +15–20 п.п.<br/>CTR +0.3–0.5 п.п.</div></td>
+          <td>Время до первого заказа, смешанные корзины, стабильность приложения — не хуже</td>
+          <td class="mono">50/50 · 14 дней · по user_id</td>
+          <td>Группы разъехались — пересборка. Видимость растёт, а клики стоят — меняем позицию и копирайт. Смешанных корзин больше — ускоряем «мост».</td>
+        </tr>
+        <tr>
+          <td><div class="h5" style="font-size:22px;">02 · Быстрое добавление</div><div class="body-xs dim mono" style="margin-top:4px;">Browse &amp; Merch</div></td>
+          <td><div class="mono red" style="font-size:18px;">ATC +1–2 п.п.<br/>AOV +8–12%</div></td>
+          <td>Правки и отмены добавлений, маржа на заказ ≥ 0 в затронутых категориях</td>
+          <td class="mono">50/50 · 21 день · повседневный спрос (FMCG) → непродовольственные (GM)</td>
+          <td>Отмен больше — задерживаем подсказку, добавляем мини-редактор. Чек не растёт при росте добавлений — автодобор до порога бесплатной доставки.</td>
+        </tr>
+        <tr>
+          <td><div class="h5" style="font-size:22px;">03 · Мост для смешанных корзин</div><div class="body-xs dim mono" style="margin-top:4px;">Checkout</div></td>
+          <td><div class="mono red" style="font-size:18px;">Checkout (mixed)<br/>+3–5 п.п.</div></td>
+          <td>Успешность платежей ↔, отмены и обращения ↔, маржа на заказ ≥ 0</td>
+          <td class="mono">50/50 · 21–28 дней</td>
+          <td>Отказ на второй оплате — переиспользуем токен и метод. Путаница в цене — дублируем сумму и срок в обоих потоках.</td>
+        </tr>
+        <tr>
+          <td style="border-bottom:none;"><div class="h5" style="font-size:22px;">04 · После покупки</div><div class="body-xs dim mono" style="margin-top:4px;">Logistics &amp; Promise</div></td>
+          <td style="border-bottom:none;"><div class="mono red" style="font-size:18px;">Delivered +2–3 п.п.<br/>On-time +Y п.п.</div></td>
+          <td style="border-bottom:none;">Обращения −X%, повтор 30 / 90 дней +3–5 п.п., NPS / CSAT ↔</td>
+          <td style="border-bottom:none;" class="mono">Кластерный · 28–42 дня · diff-in-diff</td>
+          <td style="border-bottom:none;">Всплеск обращений — авто-категоризация и SLA. Срок доставки не улучшается — пересчитываем загрузку слотов, добавляем «тихие часы».</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="foot"><span></span><span>13 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S14 · МОДЕЛЬ ВКЛАДА: MBC → GMV → P&L
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="14 Модель вклада">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">06 · Экономика</div>
+    <div class="h1" style="max-width:1700px;">ОТ MBC К <span class="red">P&amp;L.</span></div>
+
+    <div class="grid" style="grid-template-columns:repeat(3, 1fr); gap:24px;">
+      <div class="card" style="padding:36px;">
+        <span class="pill solid">A</span>
+        <div class="h4" style="margin-top:18px; font-size:32px;">Абсолюты покупателей</div>
+        <div class="h5 mono" style="margin-top:18px; font-size:18px; line-height:1.7;">
+          aMAU = OMNI_MAU<br/>× Availability<br/>× Eligibility<br/>× Exposure_seen
+        </div>
+        <hr class="rule" style="margin:20px 0;" />
+        <div class="h5 mono" style="font-size:18px; line-height:1.7;">
+          ΔBuyers_ordered = aMAU × ΔMBC<br/>
+          ΔBuyers_delivered = ΔBuyers × Fulfillment_success
+        </div>
+        <div class="body-xs dim" style="margin-top:18px;">Знаменатель NSM — OMNI MAU. Абсолюты считаем только от адресуемой аудитории, иначе завышаем.</div>
+      </div>
+
+      <div class="card" style="padding:36px;">
+        <span class="pill solid">B</span>
+        <div class="h4" style="margin-top:18px; font-size:32px;">GMV — мультикатегорийный</div>
+        <div class="h5 mono" style="margin-top:18px; font-size:16px; line-height:1.7;">
+          GMV_uplift = Σ_{cat} [<br/>
+          &nbsp;&nbsp;(ΔBuyers × share_cat)<br/>
+          &nbsp;&nbsp;× AOV_cat<br/>
+          &nbsp;&nbsp;× Mix(Delivery, C&amp;C)<br/>
+          ]
+        </div>
+        <hr class="rule" style="margin:20px 0;" />
+        <div class="eyebrow red">На дашборде</div>
+        <ul class="bullets" style="margin-top:10px; gap:8px;">
+          <li>Взвешенный средний чек = Σ (w_cat × AOV_cat)</li>
+          <li>Отдельно по доставке и самовывозу</li>
+          <li>Повседневный спрос, непродовольственные, питомцы, красота, хоз</li>
+        </ul>
+      </div>
+
+      <div class="card red" style="padding:36px; color:#FFF;">
+        <span class="pill light-bg">C</span>
+        <div class="h4" style="margin-top:18px; font-size:32px; color:#FFF;">P&amp;L — вклад на заказ</div>
+        <div class="h5 mono" style="margin-top:18px; font-size:16px; line-height:1.7; color:#FFF;">
+          CM2_order = NetRevenue<br/>
+          − COGS<br/>
+          − Logistics_var<br/>
+          − Payments_fees<br/>
+          − Picking&amp;Packing<br/>
+          − Incentives<br/>
+          − Refunds / Compensations
+        </div>
+        <hr class="rule" style="margin:20px 0; border-color:rgba(255,255,255,0.25);" />
+        <div class="body-sm" style="color:rgba(255,255,255,0.92);">Предохранители: маржа на заказ ≥ 0 на доставке и самовывозе; доля «минусовых» позиций ≤ Sₙ%; LTV / CAC ≥&nbsp;3.</div>
+      </div>
+    </div>
+
+    <!-- Sanity checks -->
+    <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin-top:8px;">
+      <div class="card outline" style="padding:24px;">
+        <div class="eyebrow red">Проверка 1</div>
+        <div class="body-sm" style="margin-top:10px;">MBC растёт без роста аудитории — проверяем баланс групп и атрибуцию.</div>
+      </div>
+      <div class="card outline" style="padding:24px;">
+        <div class="eyebrow red">Проверка 2</div>
+        <div class="body-sm" style="margin-top:10px;">Добавлений больше, а чек стоит — включаем автодобор до порога бесплатной доставки.</div>
+      </div>
+      <div class="card outline" style="padding:24px;">
+        <div class="eyebrow red">Проверка 3</div>
+        <div class="body-sm" style="margin-top:10px;">MBC вверх, MDC вниз — проблема в сроках доставки или сборке.</div>
+      </div>
+      <div class="card outline" style="padding:24px;">
+        <div class="eyebrow red">Стоп-линия</div>
+        <div class="body-sm" style="margin-top:10px;">Каннибализация офлайна &gt; K% по контрольным гео-кластерам — пауза.</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>14 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S15 · UNIT ECONOMICS
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="15 Unit Economics">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">06 · Unit Economics</div>
+    <div class="h1 tight" style="max-width:1700px;">КАКИЕ РУЧКИ ДВИГАЮТ <span class="red">P&amp;L.</span></div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr; gap:32px;">
+      <div class="card" style="padding:36px;">
+        <div class="eyebrow red">Маржа на заказ</div>
+        <table class="tab" style="margin-top:14px;">
+          <thead><tr><th>Сплит</th><th>Что разрезаем</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Канал</strong></td><td>доставка vs самовывоз</td></tr>
+            <tr><td><strong>Корзина</strong></td><td>&lt; / ≥ порога бесплатной доставки</td></tr>
+            <tr><td><strong>Оплата</strong></td><td>Карта · СБП · Мир Pay</td></tr>
+            <tr><td><strong>Регион / СЦ</strong></td><td>возможности и расстояния</td></tr>
+            <tr><td style="border-bottom:none;"><strong>Категории</strong></td><td style="border-bottom:none;">повседневный спрос, непродовольственные, питомцы, красота, хоз</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="rule" style="margin:20px 0;" />
+
+        <div class="eyebrow red">Точка окупаемости бесплатной доставки</div>
+        <div class="h5 mono" style="margin-top:10px; font-size:22px;">AOV* ≥ (L + i) / g%</div>
+        <div class="body-xs dim" style="margin-top:8px;">L — переменная логистика, i — инсентивы, g — валовая маржа. При росте L (погода или пик) автоматически поднимаем AOV* или сужаем слоты.</div>
+      </div>
+
+      <div class="card red" style="padding:36px; color:#FFF;">
+        <div class="eyebrow" style="color:rgba(255,255,255,0.75);">Панель рычагов CPO</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:24px; margin-top:18px;">
+          <div>
+            <div class="h6" style="color:#FFF;">Доставка и слоты</div>
+            <ul class="bullets" style="margin-top:10px; gap:8px;">
+              <li style="color:rgba(255,255,255,0.92);">Слоты по реальной загрузке</li>
+              <li style="color:rgba(255,255,255,0.92);">Динамический порог бесплатной доставки</li>
+              <li style="color:rgba(255,255,255,0.92);">Крупногабарит — доставка с явной платой</li>
+            </ul>
+          </div>
+          <div>
+            <div class="h6" style="color:#FFF;">Оплата</div>
+            <ul class="bullets" style="margin-top:10px; gap:8px;">
+              <li style="color:rgba(255,255,255,0.92);">СБП и Мир Pay на повторах</li>
+              <li style="color:rgba(255,255,255,0.92);">Сохранённый токен — оплата в один тап</li>
+            </ul>
+          </div>
+          <div>
+            <div class="h6" style="color:#FFF;">Корзина и чек</div>
+            <ul class="bullets" style="margin-top:10px; gap:8px;">
+              <li style="color:rgba(255,255,255,0.92);">Автодобор до порога бесплатной доставки</li>
+              <li style="color:rgba(255,255,255,0.92);">Бандлы под миссии покупки</li>
+              <li style="color:rgba(255,255,255,0.92);">«Мои 20» и «Покупай снова»</li>
+            </ul>
+          </div>
+          <div>
+            <div class="h6" style="color:#FFF;">Выдача и сервис</div>
+            <ul class="bullets" style="margin-top:10px; gap:8px;">
+              <li style="color:rgba(255,255,255,0.92);">Претензия в один клик с категорией</li>
+              <li style="color:rgba(255,255,255,0.92);">Сроки ответа поддержки</li>
+              <li style="color:rgba(255,255,255,0.92);">Меньше возвратов — больше маржи</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Auto rules -->
+    <div class="card" style="padding:18px 28px;">
+      <div class="row gap-32" style="flex-wrap:wrap; align-items:flex-start;">
+        <span class="eyebrow red" style="flex:0 0 auto;">Авто-правила</span>
+        <span class="body-sm" style="font-size:17px; flex:1; min-width:240px;"><strong class="red">A.</strong> Маржа на доставке упала ниже нуля — поднимаем порог, скрываем минусовые позиции, направляем на самовывоз.</span>
+        <span class="body-sm" style="font-size:17px; flex:1; min-width:240px;"><strong class="red">B.</strong> Доля минусовых позиций в категории превысила Sₙ% — выключаем промо, бандлим с прибыльными.</span>
+        <span class="body-sm" style="font-size:17px; flex:1; min-width:240px;"><strong class="red">C.</strong> Срок доставки ниже Y% в СЦ — сужаем слоты на 24 ч, показываем честный срок, пересчитываем порог.</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>15 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S16 · ROADMAP H1 → H2 (GANTT)
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="16 Roadmap H1-H2">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:18px;">
+    <div class="kicker">07 · Roadmap</div>
+    <div class="h1 tight" style="max-width:1700px; font-size:80px;">H1 → H2: ОТ БЫСТРЫХ <span class="red">ПОБЕД К СИСТЕМЕ.</span></div>
+
+    <!-- Gantt -->
+    <div style="margin-top:12px; display:flex; flex-direction:column; gap:14px; flex:1 1 auto;">
+      <!-- weeks axis -->
+      <div style="display:grid; grid-template-columns:240px repeat(36, 1fr); align-items:end; padding-bottom:10px; border-bottom:1.5px solid var(--ink); gap:0;">
+        <div class="eyebrow" style="margin-bottom:8px;">Стрим</div>
+        <div style="grid-column:2 / span 12; text-align:center; padding-bottom:6px;"><span class="eyebrow red">H1 · 0–8 нед.</span></div>
+        <div style="grid-column:14 / span 22; text-align:center; padding-bottom:6px;"><span class="eyebrow red">H2 · 3–9 мес.</span></div>
+        <div></div>
+        <!-- ticks -->
+        <div style="grid-column:2 / -1; display:grid; grid-template-columns:repeat(36, 1fr); margin-top:0;">
+          <div style="grid-column:1; border-left:1px solid var(--hair); padding-top:6px;"><span class="body-xs mono dim">W1</span></div>
+          <div style="grid-column:5; border-left:1px solid var(--hair); padding-top:6px;"><span class="body-xs mono dim">W4</span></div>
+          <div style="grid-column:9; border-left:1px solid var(--hair); padding-top:6px;"><span class="body-xs mono dim">W8</span></div>
+          <div style="grid-column:13; border-left:1px solid var(--red); padding-top:6px;"><span class="body-xs mono" style="color:var(--red);">M3</span></div>
+          <div style="grid-column:21; border-left:1px solid var(--hair); padding-top:6px;"><span class="body-xs mono dim">M5</span></div>
+          <div style="grid-column:29; border-left:1px solid var(--hair); padding-top:6px;"><span class="body-xs mono dim">M7</span></div>
+          <div style="grid-column:36; border-right:1px solid var(--hair); padding-top:6px;"><span class="body-xs mono dim">M9</span></div>
+        </div>
+      </div>
+
+      <!-- Lane rows -->
+      <!-- helper to create a bar use inline styles -->
+      <!-- lane: Платформа -->
+      <div style="display:grid; grid-template-columns:240px repeat(36, 1fr); align-items:center; min-height:40px; border-bottom:1px solid var(--hair); padding:4px 0;">
+        <div class="h6" style="color:var(--ink);">Платформа</div>
+        <div style="grid-column:2 / span 8; height:28px; background:var(--red); border-radius:6px; padding:0 14px; display:flex; align-items:center; color:#FFF; font-size:14px; font-weight:600;">Единый вход · CTA «Покупки»</div>
+      </div>
+      <div style="display:grid; grid-template-columns:240px repeat(36, 1fr); align-items:center; min-height:40px; border-bottom:1px solid var(--hair); padding:4px 0;">
+        <div class="h6" style="color:var(--ink);">Browse &amp; Merch</div>
+        <div style="grid-column:3 / span 10; height:28px; background:var(--red); border-radius:6px; padding:0 14px; display:flex; align-items:center; color:#FFF; font-size:14px; font-weight:600;">Быстрое добавление · мультивыбор · «Мои 20»</div>
+        <div style="grid-column:14 / span 14; height:28px; background:var(--bg-3); border:1px solid var(--red); border-radius:6px; padding:0 14px; display:flex; align-items:center; color:var(--ink); font-size:14px; font-weight:500;">Персональные списки / бандлы 2.0</div>
+      </div>
+      <div style="display:grid; grid-template-columns:240px repeat(36, 1fr); align-items:center; min-height:40px; border-bottom:1px solid var(--hair); padding:4px 0;">
+        <div class="h6" style="color:var(--ink);">Checkout</div>
+        <div style="grid-column:4 / span 9; height:28px; background:var(--red); border-radius:6px; padding:0 14px; display:flex; align-items:center; color:#FFF; font-size:14px; font-weight:600;">Мост · оплата по частям</div>
+        <div style="grid-column:18 / span 10; height:28px; background:var(--bg-3); border:1px solid var(--red); border-radius:6px; padding:0 14px; display:flex; align-items:center; color:var(--ink); font-size:14px; font-weight:500;">Платежи повтора · СБП / Мир Pay</div>
+      </div>
+      <div style="display:grid; grid-template-columns:240px repeat(36, 1fr); align-items:center; min-height:40px; border-bottom:1px solid var(--hair); padding:4px 0;">
+        <div class="h6" style="color:var(--ink);">Logistics</div>
+        <div style="grid-column:5 / span 9; height:28px; background:var(--red); border-radius:6px; padding:0 14px; display:flex; align-items:center; color:#FFF; font-size:14px; font-weight:600;">SLA / ETA · 1-клик претензии</div>
+        <div style="grid-column:16 / span 12; height:28px; background:var(--bg-3); border:1px solid var(--red); border-radius:6px; padding:0 14px; display:flex; align-items:center; color:var(--ink); font-size:14px; font-weight:500;">Слоты по загрузке 2.0</div>
+      </div>
+      <div style="display:grid; grid-template-columns:240px repeat(36, 1fr); align-items:center; min-height:40px; border-bottom:1px solid var(--hair); padding:4px 0;">
+        <div class="h6" style="color:var(--ink);">CRM &amp; Retail IT</div>
+        <div style="grid-column:14 / span 16; height:28px; background:var(--bg-3); border:1px solid var(--red); border-radius:6px; padding:0 14px; display:flex; align-items:center; color:var(--ink); font-size:14px; font-weight:500;">Шопабельный e-чек · кассир-промпт · омни-петли</div>
+      </div>
+      <div style="display:grid; grid-template-columns:240px repeat(36, 1fr); align-items:center; min-height:40px; padding:4px 0;">
+        <div class="h6" style="color:var(--ink);">Data &amp; ML</div>
+        <div style="grid-column:18 / span 18; height:28px; background:var(--bg-3); border:1px solid var(--red); border-radius:6px; padding:0 14px; display:flex; align-items:center; color:var(--ink); font-size:14px; font-weight:500;">Антифрод 2.0 · персонализация · арбитраж претензий</div>
+      </div>
+    </div>
+
+    <!-- Milestones -->
+    <div class="row gap-32" style="align-items:center; padding:14px 28px; background:var(--bg-2); border-radius:14px;">
+      <span class="eyebrow red">Контрольные точки</span>
+      <div class="row gap-48" style="flex:1;">
+        <div><div class="eyebrow">конец H1</div><div class="h5" style="font-size:19px; margin-top:4px;">все 4 теста ≥ MDE</div></div>
+        <div><div class="eyebrow">конец H2</div><div class="h5" style="font-size:19px; margin-top:4px;">MBC ≥ 3–5% · LTV / CAC ≥ 3</div></div>
+        <div><div class="eyebrow">предохранители</div><div class="h5" style="font-size:19px; margin-top:4px;">NPS не хуже · CM2 / order ≥ 0</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>16 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S17 · ROADMAP H3 — «ОДНО ОКНО»
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="17 Roadmap H3">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">07 · H3 · 12–36 месяцев</div>
+    <div class="h1" style="max-width:1700px;">ОДНО ОКНО <br/><span class="red">OMNI × МАРКЕТ.</span></div>
+
+    <div class="grid" style="grid-template-columns:repeat(4, 1fr); gap:24px; flex:1 1 auto;">
+      <div class="card" style="display:flex; flex-direction:column; gap:14px; padding:32px;">
+        <span class="num red" style="font-size:64px; font-weight:800; line-height:0.85;">3.1</span>
+        <div class="h5" style="font-size:24px;">Единая корзина и сессия</div>
+        <div class="body-sm">SSO / идентичность, общая корзина и сессия OMNI ↔ Market, единая схема событий.</div>
+        <div style="margin-top:auto;" class="body-xs mono red">Готово · отвал смешанных корзин → 0</div>
+      </div>
+      <div class="card" style="display:flex; flex-direction:column; gap:14px; padding:32px;">
+        <span class="num red" style="font-size:64px; font-weight:800; line-height:0.85;">3.2</span>
+        <div class="h5" style="font-size:24px;">Единый поиск и витрины</div>
+        <div class="body-sm">Общий поиск OMNI × Market, персональные фиды по миссиям и сезону. Бандлы, «тяжёлые домой».</div>
+        <div style="margin-top:auto;" class="body-xs mono red">Готово · рост на проде, SRM = 0</div>
+      </div>
+      <div class="card" style="display:flex; flex-direction:column; gap:14px; padding:32px;">
+        <span class="num red" style="font-size:64px; font-weight:800; line-height:0.85;">3.3</span>
+        <div class="h5" style="font-size:24px;">Система заказов (OMS) нового поколения</div>
+        <div class="body-sm">Прогноз спроса × логистики, динамические окна слотов, SLA-контракты по категориям.</div>
+        <div style="margin-top:auto;" class="body-xs mono red">Готово · срок ≥ Z%, маржа ↑</div>
+      </div>
+      <div class="card red" style="display:flex; flex-direction:column; gap:14px; padding:32px; color:#FFF;">
+        <span class="num" style="font-size:64px; font-weight:800; line-height:0.85; color:#FFF;">3.4</span>
+        <div class="h5" style="font-size:24px; color:#FFF;">Автопокупки / подписки</div>
+        <div class="body-sm" style="color:rgba(255,255,255,0.92);">Повторяемые миссии без скидочной зависимости — кассеты, питомцы, уход за младенцами.</div>
+        <div style="margin-top:auto;" class="body-xs mono" style="color:rgba(255,255,255,0.85);">Готово · возврат 90 дней ↑, LTV / CAC ↑</div>
+      </div>
+    </div>
+
+    <!-- gate criteria -->
+    <div class="card outline" style="padding:28px 32px;">
+      <div class="eyebrow red">Gate-критерии перехода между фазами</div>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr; gap:32px; margin-top:18px;">
+        <div>
+          <div class="h6">H1 → H2</div>
+          <div class="body-sm dim" style="margin-top:6px;">Все 4 инициативы ≥ MDE, предохранители ок, NSM тренд +Δ п.п. четыре недели подряд.</div>
+        </div>
+        <div>
+          <div class="h6">H2 → H3</div>
+          <div class="body-sm dim" style="margin-top:6px;">MBC ≥ 3–5%, Repeat / NPS не хуже, CM2 / order ≥ 0 по каналам, тех-долг событий закрыт.</div>
+        </div>
+        <div>
+          <div class="h6">Финиш H3</div>
+          <div class="body-sm dim" style="margin-top:6px;">MBC ≥ 10%, доля заказов через OMNI ≥ 80%, отвал смешанных корзин ≈ 0, доставка в срок ≥ целевого.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>17 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S18 · OPERATING MODEL — RACI
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="18 RACI">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">08 · Operating Model</div>
+    <div class="h1" style="max-width:1700px;">ВЛАДЕЛЬЦЫ, RACI <br/>И <span class="red">РИТМЫ.</span></div>
+
+    <table class="tab" style="margin-top:8px;">
+      <thead>
+        <tr>
+          <th style="width:280px;">Инициатива</th>
+          <th>Responsible</th>
+          <th>Accountable</th>
+          <th>Consulted</th>
+          <th>Informed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="h6">01 · Единый вход / навигация</div></td>
+          <td><div class="h6">Platform &amp; CX PM</div><div class="body-xs dim">single owner</div></td>
+          <td>CPO e-com</td>
+          <td>Browse, Checkout, CRM, Brand/Copy</td>
+          <td>Logistics, Support</td>
+        </tr>
+        <tr>
+          <td><div class="h6">02 · Быстрый ATC</div></td>
+          <td><div class="h6">Browse &amp; Merch PM</div></td>
+          <td>CPO e-com</td>
+          <td>Data &amp; ML, Platform, CRM</td>
+          <td>Checkout, Support</td>
+        </tr>
+        <tr>
+          <td><div class="h6">03 · Мост mixed-cart</div></td>
+          <td><div class="h6">Checkout PM</div></td>
+          <td>CPO e-com</td>
+          <td>Platform (routing / кошелёк), Legal / InfoSec, Brand/Copy</td>
+          <td>Logistics, Support</td>
+        </tr>
+        <tr>
+          <td style="border-bottom:none;"><div class="h6">04 · Post-purchase</div></td>
+          <td style="border-bottom:none;"><div class="h6">Logistics &amp; Promise PM</div></td>
+          <td style="border-bottom:none;">COO / CPO e-com</td>
+          <td style="border-bottom:none;">CX / Support, Platform (notifications), CRM</td>
+          <td style="border-bottom:none;">Data &amp; ML</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Cadences -->
+    <div class="grid" style="grid-template-columns:repeat(5, 1fr); gap:16px; margin-top:8px;">
+      <div class="card" style="padding:24px;">
+        <span class="eyebrow red">ежедневно · 15 мин</span>
+        <div class="h6" style="margin-top:10px;">CPO Daily</div>
+        <div class="body-xs dim" style="margin-top:6px;">NSM 1/7/28, спарклайны 6 шагов, предохранители, инциденты.</div>
+      </div>
+      <div class="card" style="padding:24px;">
+        <span class="eyebrow red">еженедельно · 60 мин</span>
+        <div class="h6" style="margin-top:10px;">Growth Review</div>
+        <div class="body-xs dim" style="margin-top:6px;">A/B решения go / hold / kill, MDE-факты, RICE.</div>
+      </div>
+      <div class="card" style="padding:24px;">
+        <span class="eyebrow red">двухнедельно</span>
+        <div class="h6" style="margin-top:10px;">Ops Sync</div>
+        <div class="body-xs dim" style="margin-top:6px;">Слоты, загрузка, расчётное время, претензии, фрод.</div>
+      </div>
+      <div class="card" style="padding:24px;">
+        <span class="eyebrow red">ежемесячно</span>
+        <div class="h6" style="margin-top:10px;">P&amp;L Review</div>
+        <div class="body-xs dim" style="margin-top:6px;">CM2 / order, UCM, LTV / CAC, каннибализация.</div>
+      </div>
+      <div class="card red" style="padding:24px; color:#FFF;">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.75);">ежеквартально</span>
+        <div class="h6" style="margin-top:10px; color:#FFF;">Architecture Board</div>
+        <div class="body-xs" style="color:rgba(255,255,255,0.85); margin-top:6px;">Единая корзина / поиск, тех-долг событий.</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>18 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S19 · СВОДНАЯ ТАБЛИЦА KPI × ВЛАДЕЛЬЦЫ × MDE
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="19 KPI таблица">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">09 · Чек-лист исполнения</div>
+    <div class="h1" style="max-width:1700px;">KPI × ВЛАДЕЛЬЦЫ <span class="red">× MDE.</span></div>
+
+    <table class="tab" style="margin-top:8px;">
+      <thead>
+        <tr>
+          <th style="width:180px;">Блок</th>
+          <th>Ключевая метрика</th>
+          <th style="width:200px;">Цель / MDE H1</th>
+          <th style="width:240px;">Guardrails</th>
+          <th style="width:240px;">Ответственный (DRI)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><div class="h6">Exposure</div></td><td>Share_exposed (Views)</td><td class="mono red">+15–20 п.п.</td><td>Crash-free / TTI ↔</td><td>Platform &amp; CX</td></tr>
+        <tr><td><div class="h6">CTR входов</div></td><td>CTR «Покупки»</td><td class="mono red">+0.3–0.5 п.п.</td><td>Mixed-cart rate ↔</td><td>Platform &amp; CX</td></tr>
+        <tr><td><div class="h6">ATC</div></td><td>ATC CVR, ATC latency, AOV</td><td class="mono red">+1–2 п.п. / +8–12%</td><td>CM2 / order ≥ 0 в кат.</td><td>Browse &amp; Merch</td></tr>
+        <tr><td><div class="h6">Checkout</div></td><td>Checkout CVR (mixed)</td><td class="mono red">+3–5 п.п.</td><td>Pay-success ↔ · Cancel ↔</td><td>Checkout</td></tr>
+        <tr><td><div class="h6">Pay-success</div></td><td>Pay-success %</td><td class="mono">не хуже базы</td><td>Contact rate ↔</td><td>Checkout · Platform</td></tr>
+        <tr><td><div class="h6">Fulfillment</div></td><td>Delivered-success %, On-time %</td><td class="mono red">+2–3 п.п. · +Y п.п.</td><td>NPS / CSAT ↔</td><td>Logistics &amp; Promise</td></tr>
+        <tr><td><div class="h6">Post-purchase</div></td><td>Contact rate, Repeat 30/90d</td><td class="mono red">−X% · +3–5 п.п.</td><td>SLA саппорта</td><td>CX · Logistics</td></tr>
+        <tr><td style="border-bottom:none;"><div class="h6">Экономика</div></td><td style="border-bottom:none;">CM2 / order, Share neg. UCM</td><td style="border-bottom:none;" class="mono">≥ 0 · ≤ Sₙ%</td><td style="border-bottom:none;">LTV / CAC ≥ 3</td><td style="border-bottom:none;">Finance Ops · Data &amp; ML</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="foot"><span></span><span>19 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S20 · EXECUTION PLAYBOOKS
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="20 Playbooks">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:20px;">
+    <div class="kicker">09 · Execution playbooks</div>
+    <div class="h1" style="max-width:1700px; font-size:96px;">ЧТО ДЕЛАЕМ, КАК МЕРИМ, КОГДА <span class="red">«ГОТОВО».</span></div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr; gap:20px; flex:1 1 auto;">
+      <!-- Playbook 1 -->
+      <div class="card" style="padding:24px 28px; display:flex; flex-direction:column; gap:10px;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <span class="pill solid">9.1 · Exposure → CTR</span>
+          <span class="num red" style="font-size:40px; font-weight:800; line-height:0.8;">01</span>
+        </div>
+        <div class="h5" style="font-size:24px;">Единый вход «Покупки»</div>
+        <div class="body-sm" style="font-size:18px;">CTA «Покупки» → 2 таба, бейдж источника на PLP/PDP, Market-витрины выше сгиба.</div>
+        <div class="body-xs mono dim">Главное ·Views +15–20 п.п. · CTR +0.3–0.5 п.п. · 50/50 · 14 дней</div>
+        <div class="body-xs mono red" style="margin-top:auto;">Готово · ≥ MDE в обеих главных метриках, доля смешанных корзин ↔</div>
+      </div>
+      <!-- Playbook 2 -->
+      <div class="card" style="padding:24px 28px; display:flex; flex-direction:column; gap:10px;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <span class="pill solid">9.2 · ATC</span>
+          <span class="num red" style="font-size:40px; font-weight:800; line-height:0.8;">02</span>
+        </div>
+        <div class="h5" style="font-size:24px;">Быстрое добавление + повтор сверху</div>
+        <div class="body-sm" style="font-size:18px;">«+» на PLP, селектор вариантов, мультивыбор, блоки «Мои 20 / Покупай снова» — первым экраном.</div>
+        <div class="body-xs mono dim">Главное ·ATC +1–2 п.п. · AOV +8–12% · 50/50 · 21 день</div>
+        <div class="body-xs mono red" style="margin-top:auto;">Готово · ≥ MDE и маржа в норме в ≥ 80% категорий</div>
+      </div>
+      <!-- Playbook 3 -->
+      <div class="card" style="padding:24px 28px; display:flex; flex-direction:column; gap:10px;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <span class="pill solid">9.3 · Checkout (mixed)</span>
+          <span class="num red" style="font-size:40px; font-weight:800; line-height:0.8;">03</span>
+        </div>
+        <div class="h5" style="font-size:24px;">Мост между корзинами</div>
+        <div class="body-sm" style="font-size:18px;">Инфо-бар «2 источника» + 1-клик раздельное оформление, явные ETA / стоимость в&nbsp;каждом подпотоке.</div>
+        <div class="body-xs mono dim">Главное ·Checkout (mixed) +3–5 п.п. · 50/50 · 21–28 дней</div>
+        <div class="body-xs mono red" style="margin-top:auto;">Готово · ≥ MDE при ↔ оплате и сервисе</div>
+      </div>
+      <!-- Playbook 4 -->
+      <div class="card red" style="padding:24px 28px; display:flex; flex-direction:column; gap:10px; color:#FFF;">
+        <div class="row" style="justify-content:space-between; align-items:flex-start;">
+          <span class="pill light-bg">9.4 · Fulfillment / Post-purchase</span>
+          <span class="num" style="font-size:40px; font-weight:800; line-height:0.8; color:#FFF;">04</span>
+        </div>
+        <div class="h5" style="font-size:24px; color:#FFF;">SLA / ETA + претензии</div>
+        <div class="body-sm" style="color:rgba(255,255,255,0.92); font-size:18px;">SLA-виджет статусов, 1-клик претензия / возврат с типизацией, авто-тикет и трекинг закрытия.</div>
+        <div class="body-xs mono" style="color:rgba(255,255,255,0.7);">Главное ·Delivered +2–3 п.п. · On-time +Y п.п. · кластерный, 28–42 дня</div>
+        <div class="body-xs mono" style="color:#FFF; margin-top:auto;">Готово · обе главные ≥ MDE, обращения ↔</div>
+      </div>
+    </div>
+
+    <div class="card outline" style="padding:16px 28px;">
+      <div class="row gap-32" style="flex-wrap:wrap; align-items:center;">
+        <span class="eyebrow red">QA-чек-лист</span>
+        <span class="body-sm" style="font-size:16px;">✓ События в проде · сквозные ID</span>
+        <span class="body-sm" style="font-size:16px;">✓ A/A 48 ч → SRM = 0</span>
+        <span class="body-sm" style="font-size:16px;">✓ Legal / копирайт согласован</span>
+        <span class="body-sm" style="font-size:16px;">✓ Резерв: откат, авто-капы</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>20 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S21 · C-LEVEL ДАШБОРД (МОК)
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="21 Дашборд">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:20px;">
+    <div class="row" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">10 · C-level дашборд</div>
+        <div class="h2" style="margin-top:14px;">ПЯТЬ БЛОКОВ ЗА <span class="red">5&nbsp;МИНУТ.</span></div>
+      </div>
+      <div class="row gap-12">
+        <span class="pill"><span class="dot" style="background:#4DD58F;"></span>≥ цель</span>
+        <span class="pill"><span class="dot" style="background:#F0AC36;"></span>в коридоре</span>
+        <span class="pill"><span class="dot" style="background:var(--red);"></span>ниже MDE</span>
+      </div>
+    </div>
+
+    <!-- mock dashboard layout -->
+    <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr; grid-template-rows:auto auto; gap:16px; flex:1 1 auto;">
+      <!-- A -->
+      <div class="card" style="padding:24px; grid-row:span 1;">
+        <div class="row" style="justify-content:space-between; align-items:baseline;">
+          <span class="eyebrow red">A · NSM &amp; вклад инициатив</span>
+          <span class="body-xs mono dim">1 / 7 / 28 d</span>
+        </div>
+        <div class="row gap-32" style="margin-top:14px; align-items:flex-end;">
+          <div>
+            <div class="body-xs dim">MBC сегодня</div>
+            <div class="num" style="font-size:72px; font-weight:800; color:#4DD58F;">1.4<span style="font-size:0.5em;">%</span></div>
+            <div class="delta up">▲ +0.4 п.п. к Q4</div>
+          </div>
+          <div>
+            <div class="body-xs dim">MDC</div>
+            <div class="num" style="font-size:48px; font-weight:700;">1.2<span style="font-size:0.55em;">%</span></div>
+            <div class="body-xs dim">MBC × Fulfillment</div>
+          </div>
+          <div>
+            <div class="body-xs dim">aMAU</div>
+            <div class="num" style="font-size:48px; font-weight:700;">22<span style="font-size:0.55em;">M</span></div>
+            <div class="body-xs dim">Exposure_seen · 73%</div>
+          </div>
+        </div>
+        <!-- contrib bar -->
+        <div class="body-xs dim mono" style="margin-top:18px;">CONTRIB-BAR</div>
+        <div style="display:flex; height:32px; border-radius:6px; overflow:hidden; margin-top:6px;">
+          <div style="flex:34; background:var(--red); display:flex; align-items:center; padding:0 12px; color:#FFF; font-size:14px; font-weight:600;">Навигация 34%</div>
+          <div style="flex:26; background:var(--red-deep); display:flex; align-items:center; padding:0 12px; color:#FFF; font-size:14px; font-weight:600;">ATC 26%</div>
+          <div style="flex:22; background:#A4061A; display:flex; align-items:center; padding:0 12px; color:#FFF; font-size:14px; font-weight:600;">Мост 22%</div>
+          <div style="flex:18; background:#6E0414; display:flex; align-items:center; padding:0 12px; color:#FFF; font-size:14px; font-weight:600;">Post-purch 18%</div>
+        </div>
+      </div>
+
+      <!-- B -->
+      <div class="card" style="padding:24px;">
+        <span class="eyebrow red">B · Воронка 6 шагов</span>
+        <div class="col gap-8" style="margin-top:14px;">
+          <div style="display:grid; grid-template-columns:90px 1fr 60px; gap:10px; align-items:center;"><span class="body-xs mono">Views</span><div style="height:8px; background:rgba(238,16,36,0.18); border-radius:2px;"><div style="height:100%; background:#4DD58F; width:100%; border-radius:2px;"></div></div><span class="num" style="font-size:16px; font-weight:700; text-align:right;">73%</span></div>
+          <div style="display:grid; grid-template-columns:90px 1fr 60px; gap:10px; align-items:center;"><span class="body-xs mono">CTR</span><div style="height:8px; background:rgba(238,16,36,0.18); border-radius:2px;"><div style="height:100%; background:#4DD58F; width:78%; border-radius:2px;"></div></div><span class="num" style="font-size:16px; font-weight:700; text-align:right;">4.2%</span></div>
+          <div style="display:grid; grid-template-columns:90px 1fr 60px; gap:10px; align-items:center;"><span class="body-xs mono">Intent</span><div style="height:8px; background:rgba(238,16,36,0.18); border-radius:2px;"><div style="height:100%; background:#F0AC36; width:60%; border-radius:2px;"></div></div><span class="num" style="font-size:16px; font-weight:700; text-align:right;">62%</span></div>
+          <div style="display:grid; grid-template-columns:90px 1fr 60px; gap:10px; align-items:center;"><span class="body-xs mono">ATC</span><div style="height:8px; background:rgba(238,16,36,0.18); border-radius:2px;"><div style="height:100%; background:#F0AC36; width:48%; border-radius:2px;"></div></div><span class="num" style="font-size:16px; font-weight:700; text-align:right;">38%</span></div>
+          <div style="display:grid; grid-template-columns:90px 1fr 60px; gap:10px; align-items:center;"><span class="body-xs mono">Checkout</span><div style="height:8px; background:rgba(238,16,36,0.18); border-radius:2px;"><div style="height:100%; background:var(--red); width:32%; border-radius:2px;"></div></div><span class="num" style="font-size:16px; font-weight:700; text-align:right;">26%</span></div>
+          <div style="display:grid; grid-template-columns:90px 1fr 60px; gap:10px; align-items:center;"><span class="body-xs mono">Fulfillment</span><div style="height:8px; background:rgba(238,16,36,0.18); border-radius:2px;"><div style="height:100%; background:#4DD58F; width:88%; border-radius:2px;"></div></div><span class="num" style="font-size:16px; font-weight:700; text-align:right;">87%</span></div>
+        </div>
+        <div class="body-xs mono dim" style="margin-top:14px;">SRM = 0 · Mixed-cart 4.1%</div>
+      </div>
+
+      <!-- C -->
+      <div class="card" style="padding:24px;">
+        <span class="eyebrow red">C · Экономика</span>
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;">
+          <div><div class="body-xs dim">CM2 / order · Delivery</div><div class="num" style="font-size:36px; font-weight:800; color:#4DD58F;">+38<span style="font-size:0.55em;">₽</span></div></div>
+          <div><div class="body-xs dim">CM2 / order · C&amp;C</div><div class="num" style="font-size:36px; font-weight:800; color:#4DD58F;">+62<span style="font-size:0.55em;">₽</span></div></div>
+          <div><div class="body-xs dim">AOV vs AOV*</div><div class="num" style="font-size:36px; font-weight:800;">71<span style="font-size:0.55em;">%</span></div></div>
+          <div><div class="body-xs dim">Share neg. UCM</div><div class="num" style="font-size:36px; font-weight:800; color:#F0AC36;">4.8<span style="font-size:0.55em;">%</span></div></div>
+        </div>
+      </div>
+
+      <!-- D -->
+      <div class="card" style="padding:24px;">
+        <span class="eyebrow red">D · Сервис</span>
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;">
+          <div><div class="body-xs dim">On-time</div><div class="num" style="font-size:36px; font-weight:800; color:#4DD58F;">93<span style="font-size:0.55em;">%</span></div></div>
+          <div><div class="body-xs dim">Delivered</div><div class="num" style="font-size:36px; font-weight:800; color:#4DD58F;">96<span style="font-size:0.55em;">%</span></div></div>
+          <div><div class="body-xs dim">Contact rate</div><div class="num" style="font-size:36px; font-weight:800; color:#F0AC36;">3.4<span style="font-size:0.55em;">%</span></div></div>
+          <div><div class="body-xs dim">NPS</div><div class="num" style="font-size:36px; font-weight:800;">61</div></div>
+        </div>
+      </div>
+
+      <!-- E -->
+      <div class="card red" style="padding:24px; color:#FFF;">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.75);">E · Эксперименты &amp; авто-стопы</span>
+        <div class="col gap-10" style="margin-top:14px;">
+          <div class="row" style="justify-content:space-between; align-items:center;"><span class="body-xs">Активных A/B</span><span class="num" style="font-size:24px; font-weight:700; color:#FFF;">7</span></div>
+          <div class="row" style="justify-content:space-between; align-items:center;"><span class="body-xs">Go / Hold / Kill сегодня</span><span class="num" style="font-size:18px; font-weight:600; color:#FFF;">2 / 3 / 1</span></div>
+          <div class="row" style="justify-content:space-between; align-items:center;"><span class="body-xs">Breakers активны</span><span class="num" style="font-size:18px; font-weight:600; color:#FFF;">CM2-watch · SRM</span></div>
+          <div class="row" style="justify-content:space-between; align-items:center;"><span class="body-xs">Лаг событий</span><span class="num" style="font-size:18px; font-weight:600; color:#FFF;">2.4 мин</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>21 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S22 · РИСКИ И PLAN B
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="22 Риски">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">11 · Риски</div>
+    <div class="h1 tight" style="max-width:1700px;">ЧТО МОЖЕТ СЛОМАТЬСЯ И <span class="red">PLAN B.</span></div>
+
+    <table class="tab" style="margin-top:8px;">
+      <thead>
+        <tr>
+          <th style="width:140px;">Домен</th>
+          <th>Триггер · что замечаем</th>
+          <th>Эффект</th>
+          <th style="width:340px;">Авто-правило / План Б</th>
+          <th style="width:200px;">Владелец</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><div class="h6">Product</div><div class="body-xs dim">UX, навигация</div></td>
+            <td>Views ↑, CTR ↔, Mixed-cart rate ↑</td>
+            <td>Перегруз главной, путаница пути</td>
+            <td>Тест позиций/копира, скрыть второстепенные виджеты, вынести «чем отличается»</td>
+            <td>Platform &amp; CX</td></tr>
+        <tr><td><div class="h6">Data</div><div class="body-xs dim">эксперименты</div></td>
+            <td>SRM ≠ 0, лаг событий &gt; 5 мин</td>
+            <td>Тест недоверяльный, риск неверных решений</td>
+            <td>Останов и фикс — 2 ч в рабочее время, 6 ч в нерабочее. Пересборка и откат варианта</td>
+            <td>Data &amp; ML · Platform</td></tr>
+        <tr><td><div class="h6">Logistics</div><div class="body-xs dim">Fulfillment</div></td>
+            <td>On-time &lt; Y% 2 дня подряд</td>
+            <td>MDC отстаёт от MBC, Repeat ↓</td>
+            <td>Сузить слоты 24 ч, честный ETA активным заказам, приоритизация скоропорта</td>
+            <td>Logistics &amp; Promise</td></tr>
+        <tr><td><div class="h6">P&amp;L</div><div class="body-xs dim">Finance</div></td>
+            <td>CM2 / order &lt; 0, Share neg. UCM &gt; Sₙ%</td>
+            <td>Рост трат при росте MBC, подрыв P&amp;L</td>
+            <td>Авто-кэп инсентивов, AOV* +Δ, скрыть «минусовые» SKU из Delivery → C&amp;C</td>
+            <td>Finance Ops · Checkout</td></tr>
+        <tr><td><div class="h6">Support</div><div class="body-xs dim">Trust / NPS</div></td>
+            <td>Contact rate ↑, spike по недовложениям</td>
+            <td>Репутационный ущерб, повтор ломается</td>
+            <td>Авто-категоризация тикетов, SLA эскалации, проактивный пуш с ETA / компенсацией</td>
+            <td>CX · Support</td></tr>
+        <tr><td style="border-bottom:none;"><div class="h6">Legal</div><div class="body-xs dim">Compliance</div></td>
+            <td style="border-bottom:none;">Жалобы на копирайт стоимости / ETA / возврата</td>
+            <td style="border-bottom:none;">Регуляторные риски, штрафы</td>
+            <td style="border-bottom:none;">Откатить новую формулировку, передать в Legal review до перерелиза</td>
+            <td style="border-bottom:none;">Legal · CX</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card outline" style="padding:16px 28px;">
+      <div class="row gap-24" style="flex-wrap:wrap; align-items:center;">
+        <span class="eyebrow red">Go / No-Go → H1</span>
+        <span class="body-sm" style="font-size:16px;">✓ A/A 48 ч · SRM = 0</span>
+        <span class="body-sm" style="font-size:16px;">✓ Guardrails на дашборде</span>
+        <span class="body-sm" style="font-size:16px;">✓ Circuit breakers (sandbox)</span>
+        <span class="body-sm" style="font-size:16px;">✓ Копи / Legal ок</span>
+        <span class="body-sm" style="font-size:16px;">✓ Регламент отката</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>22 / 32</span></div>
+</section>
+<!-- ════════════════════════════════════════════════════════════════════════
+     S23 · ЧТО НУЖНО ОТ КОМПАНИИ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="23 Что нужно">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">12 · Что нужно от компании</div>
+    <div class="h1 tight" style="max-width:1700px;">ДАННЫЕ, РЕШЕНИЯ, <span class="red">NEXT STEPS.</span></div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr 1fr; gap:24px; flex:1 1 auto;">
+      <div class="card" style="padding:32px;">
+        <span class="pill solid">12.1 · Данные</span>
+        <div class="h5" style="margin-top:14px; font-size:24px;">Готовность данных</div>
+        <ul class="bullets" style="margin-top:14px; gap:10px;">
+          <li>События в проде — все 12 из плейбуков</li>
+          <li>Единые user_id ↔ order_id ↔ flow_id</li>
+          <li>aMAU-компоненты — Availability, Eligibility, Exposure_seen</li>
+          <li>AOV_cat, share_cat — Delivery / C&amp;C</li>
+          <li>Система заказов (OMS) / расчётное время прибытия (ETA) статусы по СЦ и регионам</li>
+          <li>Payments fees, Logistics_var, Picking&amp;Packing нормы</li>
+        </ul>
+      </div>
+      <div class="card" style="padding:32px;">
+        <span class="pill solid">12.2 · Решения</span>
+        <div class="h5" style="margin-top:14px; font-size:24px;">Утвердить заранее</div>
+        <ul class="bullets" style="margin-top:14px; gap:10px;">
+          <li><strong>Пороги предохранители</strong> — X, S, Sₙ, Y, K</li>
+          <li><strong>Копирайт / Legal</strong> — «чем отличается Маркет», «2 источника», «1-клик претензия»</li>
+          <li><strong>Коммуникации</strong> — лимиты пуш/SMS, шаблоны честного ETA</li>
+          <li><strong>A/B-правила</strong> — SRM-гейт, CUPED, авто-стопы</li>
+        </ul>
+      </div>
+      <div class="card red" style="padding:32px; color:#FFF;">
+        <span class="pill light-bg">12.3 · DRI</span>
+        <div class="h5" style="margin-top:14px; font-size:24px; color:#FFF;">Single-threaded ownership</div>
+        <ul class="bullets" style="margin-top:14px; gap:10px;">
+          <li style="color:rgba(255,255,255,0.92);"><strong style="color:#FFF;">Иниц. 1</strong> — Platform &amp; CX</li>
+          <li style="color:rgba(255,255,255,0.92);"><strong style="color:#FFF;">Иниц. 2</strong> — Browse &amp; Merch + Data / ML</li>
+          <li style="color:rgba(255,255,255,0.92);"><strong style="color:#FFF;">Иниц. 3</strong> — Checkout + Platform</li>
+          <li style="color:rgba(255,255,255,0.92);"><strong style="color:#FFF;">Иниц. 4</strong> — Logistics &amp; Promise + CX</li>
+          <li style="color:rgba(255,255,255,0.92);"><strong style="color:#FFF;">Data / ML</strong> — атрибуция, SRM-сторож, дашборд</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Week plan -->
+    <div class="card" style="padding:28px 32px;">
+      <div class="eyebrow red">12.4 · Next steps по неделям</div>
+      <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:16px; margin-top:16px;">
+        <div style="border-top:3px solid var(--red); padding-top:14px;">
+          <div class="num red" style="font-weight:800; font-size:32px;">W0</div>
+          <div class="h6" style="margin-top:6px;">Kick-off</div>
+          <div class="body-xs dim" style="margin-top:6px;">Утверждаем 4 инициативы, предохранители, копи. A/A 48 ч.</div>
+        </div>
+        <div style="border-top:3px solid var(--red); padding-top:14px;">
+          <div class="num red" style="font-weight:800; font-size:32px;">W1</div>
+          <div class="h6" style="margin-top:6px;">Иниц. 1 → A/B</div>
+          <div class="body-xs dim" style="margin-top:6px;">Навигация · 50/50 · 14 дней. Бейдж источника на PLP / PDP.</div>
+        </div>
+        <div style="border-top:3px solid var(--red); padding-top:14px;">
+          <div class="num red" style="font-weight:800; font-size:32px;">W2</div>
+          <div class="h6" style="margin-top:6px;">Иниц. 2 → A/B</div>
+          <div class="body-xs dim" style="margin-top:6px;">Быстрое добавление · 50/50 · 21 день. Витрины Маркета выше сгиба.</div>
+        </div>
+        <div style="border-top:3px solid var(--red); padding-top:14px;">
+          <div class="num red" style="font-weight:800; font-size:32px;">W3</div>
+          <div class="h6" style="margin-top:6px;">Иниц. 3 → A/B</div>
+          <div class="body-xs dim" style="margin-top:6px;">Мост для смешанных корзин · 21–28 дней. Финалим копирайт, срок, оплату.</div>
+        </div>
+        <div style="border-top:3px solid var(--red); padding-top:14px;">
+          <div class="num red" style="font-weight:800; font-size:32px;">W4</div>
+          <div class="h6" style="margin-top:6px;">Иниц. 4 → кластер</div>
+          <div class="body-xs dim" style="margin-top:6px;">SLA / ETA · diff-in-diff · 28–42 дня. Обучение CX.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>23 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S24 · ПРИЛОЖЕНИЕ A1 · UX «ЕДИНЫЙ ВХОД»
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="24 A1 Единый вход">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="row" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">Приложение A · UX-спека A1</div>
+        <div class="h1 tight" style="margin-top:14px;">A1 · ЕДИНЫЙ <span class="red">ВХОД.</span></div>
+      </div>
+      <div class="body-sm" style="max-width:560px; color:var(--ink-2);">↑ Views +15–20 п.п. и CTR +0.3–0.5 п.п. за&nbsp;счёт снятия когнитивного выбора и&nbsp;ранней ясности источника.</div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1.2fr 1fr; gap:32px; flex:1 1 auto;">
+      <!-- Left: IA -->
+      <div>
+        <div class="eyebrow red">IA · MVP</div>
+        <ul class="bullets" style="margin-top:14px; gap:12px;">
+          <li><strong>Главная ОМНИ</strong> — крупный CTA «Покупки» над сгибом.</li>
+          <li><strong>Экран «Покупки»</strong> — два таба: «Из магазина (доставка / C&amp;C)» и «Маркет», с короткими описаниями различий.</li>
+          <li><strong>PLP / PDP</strong> — бейдж источника + хинт при переключении.</li>
+          <li><strong>Поиск</strong> — один инпут, результаты с бейджем, фильтр «Все / Из магазина / Маркет».</li>
+          <li><strong>Переходы</strong> — сохраняем источник, не теряем контекст.</li>
+        </ul>
+
+        <hr class="rule" style="margin:24px 0;" />
+
+        <div class="eyebrow red">Варианты A/B</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:14px;">
+          <div class="card" style="padding:18px;">
+            <div class="h6">V1 · Hero</div>
+            <div class="body-xs" style="margin-top:6px; color:var(--ink-2);">CTA — крупный тайл в первом ряду</div>
+          </div>
+          <div class="card" style="padding:18px;">
+            <div class="h6">V2 · Top-nav</div>
+            <div class="body-xs" style="margin-top:6px; color:var(--ink-2);">CTA в верхней навигации + дубль</div>
+          </div>
+          <div class="card" style="padding:18px;">
+            <div class="h6">V3 · Context</div>
+            <div class="body-xs" style="margin-top:6px; color:var(--ink-2);">CTA + подпояс с подсказкой различий</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Wire-frame mock -->
+      <div class="card" style="padding:24px; border:1px solid var(--hair-2); background:#14242B;">
+        <div class="body-xs mono" style="color:var(--ink-3);">Главная ОМНИ · wireframe</div>
+        <div style="margin-top:14px; border:1.5px solid var(--hair-2); border-radius:18px; padding:20px; background:#1B2D35;">
+          <!-- nav -->
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-family:var(--f-disp); font-weight:800; color:var(--red); font-size:14px; line-height:1;">МАГНИТ<br/>OMNI</div>
+            <div class="body-xs" style="color:var(--ink-3);">Адрес · карта · профиль</div>
+          </div>
+          <!-- CTA Покупки -->
+          <div style="margin-top:14px; background:var(--red); color:#FFF; padding:24px; border-radius:14px;">
+            <div class="body-xs" style="color:rgba(255,255,255,0.75);">CTA</div>
+            <div class="h4" style="color:#FFF; margin-top:4px; font-size:34px;">ПОКУПКИ →</div>
+          </div>
+          <!-- Tabs -->
+          <div style="margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div style="padding:16px; background:#0E1A1F; color:#FFF; border-radius:10px;">
+              <div class="body-xs" style="color:rgba(255,255,255,0.65);">Активный</div>
+              <div class="h6" style="color:#FFF; margin-top:4px;">Из магазина</div>
+              <div class="body-xs" style="color:rgba(255,255,255,0.65); margin-top:4px;">Сегодня · C&amp;C</div>
+            </div>
+            <div style="padding:16px; background:#14242B; border:1px solid var(--hair-2); border-radius:10px;">
+              <div class="body-xs" style="color:var(--ink-3);">Таб</div>
+              <div class="h6" style="margin-top:4px;">Маркет</div>
+              <div class="body-xs" style="color:var(--ink-3); margin-top:4px;">Расширенный</div>
+            </div>
+          </div>
+          <!-- Витрины -->
+          <div style="margin-top:14px;">
+            <div class="body-xs mono" style="color:var(--ink-3);">МОИ 20 / ПОКУПАЙ СНОВА</div>
+            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-top:8px;">
+              <div style="aspect-ratio:1; background:#14242B; border:1px solid var(--hair); border-radius:8px; position:relative;"><div style="position:absolute; top:4px; left:4px; padding:2px 6px; background:var(--red); color:#FFF; font-family:var(--f-mono); font-size:9px; border-radius:3px;">МАРКЕТ</div></div>
+              <div style="aspect-ratio:1; background:#14242B; border:1px solid var(--hair); border-radius:8px; position:relative;"><div style="position:absolute; top:4px; left:4px; padding:2px 6px; background:#0E1A1F; color:#FFF; font-family:var(--f-mono); font-size:9px; border-radius:3px;">МАГАЗИН</div></div>
+              <div style="aspect-ratio:1; background:#14242B; border:1px solid var(--hair); border-radius:8px; position:relative;"><div style="position:absolute; top:4px; left:4px; padding:2px 6px; background:#0E1A1F; color:#FFF; font-family:var(--f-mono); font-size:9px; border-radius:3px;">МАГАЗИН</div></div>
+              <div style="aspect-ratio:1; background:#14242B; border:1px solid var(--hair); border-radius:8px; position:relative;"><div style="position:absolute; top:4px; left:4px; padding:2px 6px; background:var(--red); color:#FFF; font-family:var(--f-mono); font-size:9px; border-radius:3px;">МАРКЕТ</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DoD strip -->
+    <div class="card" style="padding:20px 28px; background:#14242B; border:1px solid var(--hair-2);">
+      <div class="row gap-32" style="align-items:center;">
+        <span class="eyebrow red">Готовность к завершению</span>
+        <span class="body-sm">Views +15–20 п.п. за 14 дней · SRM = 0</span>
+        <span class="body-sm">Доля смешанных корзин не растёт · стабильность не хуже</span>
+        <span class="body-sm">Бейдж источника виден на всех карточках · хинт 1×/сессия</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>24 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S25 · ПРИЛОЖЕНИЕ A2 · QUICK-ADD НА PLP
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="25 A2 Быстрое добавление">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="row" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">Приложение A · UX-спека A2</div>
+        <div class="h1 tight" style="margin-top:14px;">A2 · БЫСТРОЕ ДОБАВЛЕНИЕ <span class="red">В СПИСКЕ.</span></div>
+      </div>
+      <div class="body-sm" style="max-width:580px; color:var(--ink-2);">↑ Добавления в корзину +1–2 п.п., средний чек +8–12%, ↓ время до добавления — без давления скидками. Маржа на заказ ≥&nbsp;0 в&nbsp;затронутых категориях.</div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1.2fr 1fr; gap:32px; flex:1 1 auto;">
+      <div>
+        <div class="eyebrow red">Поведение MVP</div>
+        <ul class="bullets" style="margin-top:12px; gap:8px;">
+          <li><strong>«+» на карточке</strong> — первое нажатие добавляет 1, счётчик [− 1 +], тост отмены 3 сек.</li>
+          <li><strong>Товары с вариантами</strong> — компактный селектор снизу на 60% экрана, «Добавить» в корзину.</li>
+          <li><strong>Мультивыбор</strong> — чекбокс, липкая панель «Выбрано N · Добавить выбранные».</li>
+          <li><strong>«Мои 20» и «Покупай снова»</strong> — первой лентой, чипы дозировки (×2, ×3).</li>
+          <li><strong>Автодобор до порога</strong> — «Ещё на 350&nbsp;₽ — и доставка бесплатно» + 3 предложения.</li>
+        </ul>
+
+        <hr class="rule" style="margin:18px 0;" />
+
+        <div class="eyebrow red">Крайние случаи</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:10px; margin-top:12px;">
+          <div class="card" style="padding:14px;"><div class="h6" style="font-size:18px;">Нет в наличии</div><div class="body-xs" style="margin-top:4px; color:var(--ink-2); font-size:14px;">«+» неактивен, подсказка «Недоступно» / «Лимит N шт.»</div></div>
+          <div class="card" style="padding:14px;"><div class="h6" style="font-size:18px;">Регулятор / 18+</div><div class="body-xs" style="margin-top:4px; color:var(--ink-2); font-size:14px;">Быстрое добавление скрыто, тап ведёт в карточку для проверки</div></div>
+          <div class="card" style="padding:14px;"><div class="h6" style="font-size:18px;">Крупногабарит</div><div class="body-xs" style="margin-top:4px; color:var(--ink-2); font-size:14px;">Бейдж, подсказка «Доставка — да, самовывоз — нет»</div></div>
+          <div class="card" style="padding:14px;"><div class="h6" style="font-size:18px;">Старые устройства</div><div class="body-xs" style="margin-top:4px; color:var(--ink-2); font-size:14px;">Мультивыбор выключен, мини-корзина упрощена</div></div>
+        </div>
+      </div>
+
+      <!-- mock PLP -->
+      <div class="card" style="padding:20px; background:#14242B; border:1px solid var(--hair-2);">
+        <div class="body-xs mono" style="color:var(--ink-3);">Список товаров · быстрое добавление</div>
+        <div style="margin-top:10px; border:1.5px solid var(--hair-2); border-radius:14px; padding:14px; background:#1B2D35;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <!-- card 1 -->
+            <div style="background:#14242B; border-radius:10px; padding:10px; position:relative;">
+              <div style="height:90px; background:rgba(244,239,231,0.08); border-radius:6px;"></div>
+              <div class="body-xs" style="margin-top:6px; color:var(--ink-2); font-size:13px;">Молоко 3.2% · 1л</div>
+              <div class="h6" style="margin-top:2px; font-size:15px;">89 ₽</div>
+              <div style="position:absolute; right:8px; top:8px; width:30px; height:30px; background:var(--red); border-radius:7px; display:flex; align-items:center; justify-content:center; color:#FFF; font-family:var(--f-disp); font-weight:800; font-size:17px;">+</div>
+            </div>
+            <!-- card 2 — added state -->
+            <div style="background:#14242B; border-radius:10px; padding:10px; position:relative; box-shadow:0 0 0 2px var(--red);">
+              <div style="height:90px; background:rgba(244,239,231,0.08); border-radius:6px;"></div>
+              <div class="body-xs" style="margin-top:6px; color:var(--ink-2); font-size:13px;">Хлеб · 400г</div>
+              <div class="h6" style="margin-top:2px; font-size:15px;">52 ₽</div>
+              <div style="position:absolute; right:8px; top:8px; display:flex; align-items:center; background:#0E1A1F; border-radius:7px; height:30px;">
+                <div style="width:24px; display:flex; align-items:center; justify-content:center; color:#FFF; font-size:13px;">−</div>
+                <div style="width:22px; display:flex; align-items:center; justify-content:center; color:#FFF; font-family:var(--f-disp); font-weight:700; font-size:13px;">2</div>
+                <div style="width:24px; display:flex; align-items:center; justify-content:center; color:#FFF; font-size:13px;">+</div>
+              </div>
+            </div>
+            <!-- card 3 -->
+            <div style="background:#14242B; border-radius:10px; padding:10px; position:relative;">
+              <div style="height:90px; background:rgba(244,239,231,0.08); border-radius:6px;"></div>
+              <div class="body-xs" style="margin-top:6px; color:var(--ink-2); font-size:13px;">Сыр Пошехонский · 200г</div>
+              <div class="h6" style="margin-top:2px; font-size:15px;">189 ₽</div>
+              <div style="position:absolute; right:8px; top:8px; width:30px; height:30px; background:var(--red); border-radius:7px; display:flex; align-items:center; justify-content:center; color:#FFF; font-family:var(--f-disp); font-weight:800; font-size:17px;">+</div>
+            </div>
+            <!-- card 4 -->
+            <div style="background:#14242B; border-radius:10px; padding:10px; position:relative;">
+              <div style="height:90px; background:rgba(244,239,231,0.08); border-radius:6px;"></div>
+              <div class="body-xs" style="margin-top:6px; color:var(--ink-2); font-size:13px;">Яблоки Гала · 1кг</div>
+              <div class="h6" style="margin-top:2px; font-size:15px;">124 ₽</div>
+              <div style="position:absolute; right:8px; top:8px; width:30px; height:30px; background:var(--red); border-radius:7px; display:flex; align-items:center; justify-content:center; color:#FFF; font-family:var(--f-disp); font-weight:800; font-size:17px;">+</div>
+            </div>
+          </div>
+          <!-- mini cart peek -->
+          <div style="margin-top:10px; background:#0E1A1F; color:#FFF; padding:10px 14px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
+            <div style="min-width:0;"><span class="body-xs" style="color:rgba(255,255,255,0.7); font-size:12px; white-space:nowrap;">3 товара · корзина</span><div class="h6" style="color:#FFF; font-size:16px; margin-top:2px;">364 ₽</div></div>
+            <div style="background:var(--red); padding:6px 12px; border-radius:6px; font-family:var(--f-mono); font-size:11px; white-space:nowrap; flex:0 0 auto;">Оформить →</div>
+          </div>
+          <!-- nudge -->
+          <div style="margin-top:6px; padding:8px 12px; background:rgba(238,16,36,0.1); border:1px solid var(--red); border-radius:8px; color:var(--ink); font-size:13px;">
+            Ещё на <strong style="color:var(--red);">236 ₽</strong> — и доставка бесплатно
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:18px 28px; background:#14242B; border:1px solid var(--hair-2);">
+      <div class="row gap-32" style="align-items:center;">
+        <span class="eyebrow red">Эксперимент</span>
+        <span class="body-sm mono">50/50 · 21 день · FMCG → GM</span>
+        <span class="body-sm">Правки и отмены ≤ U% · маржа на заказ ≥ 0 в&nbsp;затронутых · стабильность ↔</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>25 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S26 · ПРИЛОЖЕНИЕ A3 · МОСТ MIXED-CART
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="26 A3 Мост">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="row" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">Приложение A · UX-спека A3</div>
+        <div class="h1" style="margin-top:14px;">A3 · МОСТ ДЛЯ <br/><span class="red">СМЕШАННЫХ КОРЗИН.</span></div>
+      </div>
+      <div class="body-sm" style="max-width:600px; color:var(--ink-2);">↑ Конверсия в оплату для смешанных корзин +3–5 п.п., успешность оплат не хуже базы, отмены и обращения ↔, маржа на заказ ≥ 0&nbsp;в&nbsp;обоих потоках.</div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1.1fr 1fr; gap:32px; flex:1 1 auto;">
+      <div>
+        <div class="eyebrow red">Архитектура · флоу MVP</div>
+        <ul class="bullets" style="margin-top:14px; gap:12px;">
+          <li><strong>Детектор смешанной корзины</strong> — флаг cart_mixed = true, маркер market_groups.</li>
+          <li><strong>Инфо-бар</strong> — «В корзине товары из двух источников. Оформим по очереди» + кнопки «Оформить отдельно» / «Изменить».</li>
+          <li><strong>Шаг 1 · Из магазина</strong> — срок и стоимость, бейдж источника, заказ № 1.</li>
+          <li><strong>Шаг 2 · Маркет</strong> — тот же метод оплаты по сохранённому токену, стоимость и срок, заказ № 2.</li>
+          <li><strong>Кошелёк / лояльность</strong> — общий прогресс бонусов в шапке (визуально). Фактическое начисление — помодульно.</li>
+        </ul>
+
+        <hr class="rule" style="margin:24px 0;" />
+
+        <div class="eyebrow red">Крайние случаи</div>
+        <ul class="bullets" style="margin-top:12px; gap:10px;">
+          <li>Несколько продавцов → «доставка может прийти частями»</li>
+          <li>Закрыт магазин «Из магазина» → «оформить только Маркет»</li>
+          <li>OOS в одном потоке → замена / удаление без разрушения другого</li>
+          <li>18+ / регулятор → верификация на нужном шаге, прогресс сохраняется</li>
+        </ul>
+      </div>
+
+      <!-- mock split-checkout -->
+      <div class="card" style="padding:24px; background:#14242B; border:1px solid var(--hair-2);">
+        <div class="body-xs mono" style="color:var(--ink-3);">Корзина · детектор + инфо-бар</div>
+
+        <!-- info bar -->
+        <div style="margin-top:14px; padding:18px; background:#0E1A1F; color:#FFF; border-radius:14px; position:relative;">
+          <div class="body-xs mono" style="color:rgba(255,255,255,0.6);">Mixed cart · 2 источника</div>
+          <div class="h6" style="color:#FFF; margin-top:8px; font-size:18px;">В корзине товары из двух источников.<br/>Оформим по очереди — так быстрее.</div>
+          <div style="margin-top:14px; display:flex; gap:10px;">
+            <div style="background:var(--red); color:#FFF; padding:10px 16px; border-radius:8px; font-family:var(--f-sans); font-weight:600; font-size:14px;">Оформить отдельно →</div>
+            <div style="background:rgba(255,255,255,0.1); color:#FFF; padding:10px 16px; border-radius:8px; font-family:var(--f-sans); font-size:14px;">Изменить</div>
+          </div>
+        </div>
+
+        <!-- two flow cards -->
+        <div style="margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div style="background:#1B2D35; padding:16px; border-radius:12px; border:1.5px solid var(--hair-2);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="body-xs mono" style="color:var(--ink);">ШАГ 1</span>
+              <span style="padding:3px 8px; background:#0E1A1F; color:#FFF; font-family:var(--f-mono); font-size:10px; border-radius:4px;">МАГАЗИН</span>
+            </div>
+            <div class="h6" style="margin-top:8px;">Из магазина</div>
+            <div class="body-xs" style="margin-top:6px; color:var(--ink-2);">Доставка сегодня · 60 ₽<br/>ETA 18:40 ±15 мин</div>
+            <div style="margin-top:12px; height:6px; background:rgba(14,26,31,0.1); border-radius:3px;"><div style="height:100%; width:100%; background:#4DD58F; border-radius:3px;"></div></div>
+            <div class="body-xs mono" style="margin-top:6px; color:#4DD58F;">Создан #A-49021</div>
+          </div>
+          <div style="background:rgba(238,16,36,0.1); padding:16px; border-radius:12px; border:1.5px solid var(--red);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="body-xs mono" style="color:var(--red);">ШАГ 2</span>
+              <span style="padding:3px 8px; background:var(--red); color:#FFF; font-family:var(--f-mono); font-size:10px; border-radius:4px;">МАРКЕТ</span>
+            </div>
+            <div class="h6" style="margin-top:8px;">Маркет · 2 продавца</div>
+            <div class="body-xs" style="margin-top:6px; color:var(--ink-2);">Доставка 2–4 дня · от 199 ₽<br/>Метод оплаты — тот же</div>
+            <div style="margin-top:12px; height:6px; background:rgba(14,26,31,0.1); border-radius:3px;"><div style="height:100%; width:35%; background:var(--red); border-radius:3px;"></div></div>
+            <div class="body-xs mono" style="margin-top:6px; color:var(--red);">Оформляется…</div>
+          </div>
+        </div>
+
+        <!-- summary -->
+        <div style="margin-top:12px; padding:14px 16px; background:#1B2D35; border-radius:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span class="body-sm">Заказ 1 · из магазина</span><span class="num" style="font-weight:700;">1 247 ₽</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:4px;">
+            <span class="body-sm">Заказ 2 · маркет</span><span class="num" style="font-weight:700;">2 894 ₽</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>26 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S27 · ПРИЛОЖЕНИЕ A4 · POST-PURCHASE
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="27 A4 Post-purchase">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="row" style="justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="kicker">Приложение A · UX-спека A4</div>
+        <div class="h1" style="margin-top:14px;">A4 · ПОСЛЕ <br/><span class="red">ПОКУПКИ.</span></div>
+      </div>
+      <div class="body-sm" style="max-width:600px; color:var(--ink-2);">↑ Успешные доставки +2–3 п.п., в срок +Y п.п., ↓ обращения −X%, ошибка срока &lt; Z мин, возврат за 30 / 90 дней +3–5 п.п.</div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1.2fr 1fr; gap:32px; flex:1 1 auto;">
+      <div>
+        <div class="eyebrow red">Экран заказа · линия времени</div>
+        <!-- timeline -->
+        <div style="margin-top:18px; display:flex; align-items:center;">
+          <div style="display:flex; align-items:center; gap:0; flex:1;">
+            <div style="width:28px; height:28px; border-radius:50%; background:#4DD58F; display:flex; align-items:center; justify-content:center; color:var(--ink); font-family:var(--f-disp); font-weight:800; font-size:14px;">✓</div>
+            <div style="flex:1; height:3px; background:#4DD58F;"></div>
+            <div style="width:28px; height:28px; border-radius:50%; background:#4DD58F; display:flex; align-items:center; justify-content:center; color:var(--ink); font-family:var(--f-disp); font-weight:800; font-size:14px;">✓</div>
+            <div style="flex:1; height:3px; background:var(--red);"></div>
+            <div style="width:28px; height:28px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; color:#FFF; font-family:var(--f-disp); font-weight:800; font-size:14px;">●</div>
+            <div style="flex:1; height:3px; background:rgba(14,26,31,0.12);"></div>
+            <div style="width:28px; height:28px; border-radius:50%; background:#14242B; border:2px solid rgba(14,26,31,0.3); color:rgba(14,26,31,0.4); display:flex; align-items:center; justify-content:center; font-family:var(--f-disp); font-weight:800; font-size:14px;">·</div>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-top:10px;">
+          <div class="body-xs mono" style="color:var(--ink-2);">Создан</div>
+          <div class="body-xs mono" style="color:var(--ink-2);">В сборке</div>
+          <div class="body-xs mono" style="color:var(--red); font-weight:600;">В пути · сейчас</div>
+          <div class="body-xs mono" style="color:rgba(14,26,31,0.4);">Доставлен</div>
+        </div>
+
+        <hr class="rule" style="margin:24px 0;" />
+
+        <div class="eyebrow red">Претензия в 1 клик · типы</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:14px;">
+          <div class="card" style="padding:14px; text-align:center;"><div class="h6" style="font-size:16px;">Недовложение</div></div>
+          <div class="card" style="padding:14px; text-align:center;"><div class="h6" style="font-size:16px;">Повреждение</div></div>
+          <div class="card" style="padding:14px; text-align:center;"><div class="h6" style="font-size:16px;">Не то</div></div>
+          <div class="card" style="padding:14px; text-align:center;"><div class="h6" style="font-size:16px;">Задержка &gt; N ч</div></div>
+          <div class="card" style="padding:14px; text-align:center;"><div class="h6" style="font-size:16px;">Качество</div></div>
+          <div class="card" style="padding:14px; text-align:center;"><div class="h6" style="font-size:16px;">Иное</div></div>
+        </div>
+
+        <div class="body-sm" style="margin-top:18px; color:rgba(14,26,31,0.75);">
+          <strong>Авто-компенсация:</strong> недовложение ≤ K ₽ — мгновенный возврат тем же способом. Задержка &gt; N ч — фиксированная компенсация в пределах лимита. Связь с маржой: меньше возвратов — выше маржа на заказ.
+        </div>
+      </div>
+
+      <!-- ETA widget mock -->
+      <div class="card" style="padding:24px; background:#14242B; border:1px solid var(--hair-2);">
+        <div class="body-xs mono" style="color:var(--ink-3);">SLA / ETA-виджет</div>
+        <div style="margin-top:14px; border:1.5px solid var(--hair-2); border-radius:18px; padding:20px; background:#1B2D35;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <div class="body-xs" style="color:var(--ink-2);">Прибудет</div>
+              <div class="num" style="font-family:var(--f-disp); font-weight:800; font-size:64px; line-height:0.9; margin-top:4px;">18<span style="color:var(--red);">:</span>40</div>
+              <div class="body-xs" style="color:var(--ink-3); margin-top:4px;">± 15 мин · окно 18:25–18:55</div>
+            </div>
+            <div style="padding:6px 12px; background:#4DD58F; color:var(--ink); font-family:var(--f-mono); font-size:14px; font-weight:600; border-radius:6px;">в&nbsp;графике</div>
+          </div>
+          <div style="margin-top:14px; padding:12px; background:rgba(238,16,36,0.08); border-left:3px solid var(--red); border-radius:6px;">
+            <div class="body-xs" style="color:var(--ink-2);">Почему такой ETA</div>
+            <div class="body-sm" style="margin-top:4px;">Пиковая нагрузка вечера, погода — лёгкие пробки. Будем держать в курсе.</div>
+          </div>
+          <div style="margin-top:14px; display:flex; gap:8px;">
+            <div style="flex:1; padding:10px; background:#0E1A1F; color:#FFF; border-radius:8px; text-align:center; font-family:var(--f-sans); font-weight:600; font-size:13px;">Перенести</div>
+            <div style="flex:1; padding:10px; background:#14242B; border:1px solid rgba(14,26,31,0.18); color:var(--ink); border-radius:8px; text-align:center; font-family:var(--f-sans); font-weight:600; font-size:13px;">Связаться</div>
+            <div style="flex:1; padding:10px; background:var(--red); color:#FFF; border-radius:8px; text-align:center; font-family:var(--f-sans); font-weight:600; font-size:13px;">Проблема</div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <div class="body-xs mono" style="color:var(--ink-3);">Метрики</div>
+          <div class="grid" style="grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:8px;">
+            <div><div class="body-xs" style="color:var(--ink-3);">Delivered</div><div class="num red" style="font-size:32px; font-weight:800;">+2.7<span style="font-size:0.55em;">п.п.</span></div></div>
+            <div><div class="body-xs" style="color:var(--ink-3);">Contact rate</div><div class="num red" style="font-size:32px; font-weight:800;">−18<span style="font-size:0.55em;">%</span></div></div>
+            <div><div class="body-xs" style="color:var(--ink-3);">ETA error</div><div class="num red" style="font-size:32px; font-weight:800;">8<span style="font-size:0.55em;">мин</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>27 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S28 · ПРИЛОЖЕНИЕ B1 · ИССЛЕДОВАНИЯ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="28 B1 Research">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">Приложение B · Research</div>
+    <div class="h1" style="max-width:1700px;">ЧТО УЧТЕНО, <br/>ЧТО <span class="red">ДОСОБИРАЕМ.</span></div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr; gap:24px; flex:1 1 auto;">
+      <div class="card" style="padding:32px;">
+        <span class="pill solid">Уже учтено</span>
+        <ul class="bullets" style="margin-top:16px; gap:12px;">
+          <li><strong>База отзывов</strong> — 665 сигналов (Магнит 372 / Маркет 293), карта болей и приоритизация.</li>
+          <li><strong>UX-аудит</strong> — главная / поиск, PLP / PDP, обе корзины, checkout, post-purchase.</li>
+          <li><strong>Открытые источники</strong> — АКИТ (онлайн-торговля 2024 ~16.2% розницы), Data Insight, ЦБ РФ по СБП (13.4 млрд операций в 2024).</li>
+        </ul>
+      </div>
+      <div class="card" style="padding:32px;">
+        <span class="pill solid">Дособираем</span>
+        <div class="h6" style="margin-top:16px;">Поле · качественные</div>
+        <ul class="bullets" style="margin-top:8px; gap:8px;">
+          <li>Юзабилити-тесты 8 × 90 мин по 4 инициативам</li>
+          <li>Интервью миссий 12 × 60 мин (FMCG, GM, питомцы, красота)</li>
+          <li>Дневники N=30 на 10 дней — формирование корзин, ETA, задержки</li>
+        </ul>
+        <div class="h6" style="margin-top:18px;">Количественные · прод</div>
+        <ul class="bullets" style="margin-top:8px; gap:8px;">
+          <li>Логирование всех новых событий из A1–A4</li>
+          <li>Базовые срезы 6 шагов воронки по сегментам</li>
+          <li>A/B-дизайны под 4 инициативы с MDE и предохранители</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card outline" style="padding:24px 32px;">
+      <div class="eyebrow red">Бенчмарки UX-паттернов</div>
+      <div class="grid" style="grid-template-columns:repeat(4, 1fr); gap:24px; margin-top:14px;">
+        <div><div class="h6">Навигация / бейдж</div><div class="body-xs dim" style="margin-top:4px;">Instacart · Walmart · Carrefour · Amazon</div></div>
+        <div><div class="h6">Быстрое добавление / повтор</div><div class="body-xs dim" style="margin-top:4px;">Amazon · Instacart · Walmart</div></div>
+        <div><div class="h6">Split-checkout</div><div class="body-xs dim" style="margin-top:4px;">Amazon (multi-seller) · AliExpress</div></div>
+        <div><div class="h6">Post-purchase / ETA</div><div class="body-xs dim" style="margin-top:4px;">Ocado · Walmart · Amazon · Uber-class</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>28 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S29 · ПРИЛОЖЕНИЕ B2 · ВАЛИДАЦИЯ ГИПОТЕЗ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="29 B2 Валидация">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">Приложение B · Валидация</div>
+    <div class="h1" style="max-width:1700px;">ЧЕК-ЛИСТ <br/><span class="red">ДЛЯ ТЕСТОВОГО.</span></div>
+
+    <table class="tab" style="margin-top:8px;">
+      <thead>
+        <tr>
+          <th style="width:60px;">№</th>
+          <th>Инициатива → метрика</th>
+          <th style="width:280px;">MDE</th>
+          <th style="width:380px;">События</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="num red" style="font-size:32px; font-weight:700;">1</span></td>
+          <td><div class="h5" style="font-size:22px;">Навигация · единый вход</div><div class="body-xs dim">→ Exposure · CTR</div></td>
+          <td><div class="mono red" style="font-size:18px;">Views +15–20 п.п.<br/>CTR +0.3–0.5 п.п.</div></td>
+          <td class="mono">view / click_shop_entry, source_badge_shown, tab_source_select</td>
+        </tr>
+        <tr>
+          <td><span class="num red" style="font-size:32px; font-weight:700;">2</span></td>
+          <td><div class="h5" style="font-size:22px;">Быстрое добавление · повтор</div><div class="body-xs dim">→ ATC · AOV</div></td>
+          <td><div class="mono red" style="font-size:18px;">ATC +1–2 п.п.<br/>AOV +8–12%</div></td>
+          <td class="mono">plp_quick_add, atc_latency_ms, multiadd_submit, autotopup_accepted</td>
+        </tr>
+        <tr>
+          <td><span class="num red" style="font-size:32px; font-weight:700;">3</span></td>
+          <td><div class="h5" style="font-size:22px;">Мост mixed-cart</div><div class="body-xs dim">→ Checkout CVR</div></td>
+          <td><div class="mono red" style="font-size:18px;">Checkout (mixed)<br/>+3–5 п.п.</div></td>
+          <td class="mono">cart_mixed_flag, cta_split_checkout_click, payment_token_reuse</td>
+        </tr>
+        <tr>
+          <td style="border-bottom:none;"><span class="num red" style="font-size:32px; font-weight:700;">4</span></td>
+          <td style="border-bottom:none;"><div class="h5" style="font-size:22px;">ETA · претензии</div><div class="body-xs dim">→ Fulfillment · Repeat</div></td>
+          <td style="border-bottom:none;"><div class="mono red" style="font-size:18px;">Delivered +2–3 п.п.<br/>On-time +Y п.п.</div></td>
+          <td style="border-bottom:none;" class="mono">order_status_update(ETA), claim_one_click(type), eta_risk_flag</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid" style="grid-template-columns:2fr 1fr; gap:24px;">
+      <div class="card" style="padding:28px;">
+        <div class="eyebrow red">Guardrails — обязательно в каждом тесте</div>
+        <div class="row gap-32" style="margin-top:14px; flex-wrap:wrap;">
+          <span class="body-sm">CM2 / order ≥ 0 (Delivery и C&amp;C)</span>
+          <span class="body-sm">NPS / CSAT не хуже</span>
+          <span class="body-sm">SRM = 0</span>
+          <span class="body-sm">Каннибализация офлайна ≤ K% (geo-holdouts)</span>
+        </div>
+      </div>
+      <div class="card red" style="padding:28px; color:#FFF;">
+        <div class="eyebrow" style="color:rgba(255,255,255,0.75);">Запросы — данные</div>
+        <ul class="bullets" style="margin-top:10px; gap:8px;">
+          <li style="color:rgba(255,255,255,0.92);">aMAU, Fulfillment_success</li>
+          <li style="color:rgba(255,255,255,0.92);">AOV_cat / share_cat (Delivery, C&amp;C)</li>
+          <li style="color:rgba(255,255,255,0.92);">Комиссии платежей, лог-вар, нормы пикинга</li>
+          <li style="color:rgba(255,255,255,0.92);">OMS / ETA, шаблоны уведомлений</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>29 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S30 · ПРИЛОЖЕНИЕ B3 · БЕНЧМАРКИ
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="30 B3 Бенчмарки">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">Приложение B · Бенчмарки UX</div>
+    <div class="h1 tight" style="max-width:1700px;">ПАТТЕРН → МЕТРИКА <span class="red">→ A/B.</span></div>
+
+    <table class="tab dense" style="margin-top:4px;">
+      <thead>
+        <tr>
+          <th style="width:40px;">№</th>
+          <th style="width:280px;">UX-паттерн</th>
+          <th style="width:200px;">Где смотреть</th>
+          <th style="width:280px;">Как меряем</th>
+          <th>Адаптация в A/B (события)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="num red" style="font-weight:700;">1</span></td><td><strong>Единый вход + 2 таба</strong></td><td>Instacart · Walmart · Carrefour</td><td class="mono red">Views ↑ · CTR входов ↑ · Mixed-cart ↔</td><td class="mono body-xs">view / click_shop_entry, tab_source_select</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">2</span></td><td><strong>Бейдж источника на PLP / PDP</strong></td><td>Amazon · Instacart</td><td class="mono red">CTR PLP → PDP ↑ · Drop@Mixed ↓</td><td class="mono body-xs">source_badge_shown, source_switch_hint</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">3</span></td><td><strong>Быстрое добавление на PLP</strong></td><td>Instacart · Walmart</td><td class="mono red">ATC CVR ↑ · ATC latency ↓</td><td class="mono body-xs">plp_quick_add, atc_latency_ms</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">4</span></td><td><strong>Компактный селектор вариантов</strong></td><td>Amazon · Carrefour</td><td class="mono red">ATC вариативных ↑ · PDP visits ↔</td><td class="mono body-xs">plp_variant_open / select</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">5</span></td><td><strong>Мультивыбор + «добавить выбранные»</strong></td><td>Amazon lists · Instacart</td><td class="mono red">AOV ↑ · ATC / Session ↑</td><td class="mono body-xs">multiadd_select / submit</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">6</span></td><td><strong>«Покупай снова» над сгибом</strong></td><td>Amazon · Instacart</td><td class="mono red">ATC из блока ↑ · AOV ↑</td><td class="mono body-xs">list_type=reorder, atc_from_reorder</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">7</span></td><td><strong>Подсказка до порога бесплатной доставки</strong></td><td>Amazon · Ocado</td><td class="mono red">AOV ≥ AOV* ↑ · CM2 / order ↔</td><td class="mono body-xs">autotopup_offer_shown / accepted</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">8</span></td><td><strong>Инфо-бар mixed-cart + split-checkout</strong></td><td>Amazon · AliExpress</td><td class="mono red">Checkout CVR (mixed) ↑ · Pay-success ↔</td><td class="mono body-xs">cart_mixed_flag, cta_split_checkout_click</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">9</span></td><td><strong>Сохранённый токен оплаты</strong></td><td>Amazon · крупные маркетплейсы</td><td class="mono red">Pay-success ↑ · Checkout time ↓</td><td class="mono body-xs">payment_token_reuse</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">10</span></td><td><strong>ETA-виджет с диапазоном</strong></td><td>Ocado · Amazon</td><td class="mono red">On-time ↑ · ETA-error ↓ · Contact rate ↓</td><td class="mono body-xs">order_status_update(eta, band)</td></tr>
+        <tr><td><span class="num red" style="font-weight:700;">11</span></td><td><strong>Проактивные пуши о задержке</strong></td><td>Amazon · Uber-class</td><td class="mono red">Contact rate ↓ · Cancel управляемый</td><td class="mono body-xs">notification_sent / click, slot_reschedule</td></tr>
+        <tr><td style="border-bottom:none;"><span class="num red" style="font-weight:700;">12</span></td><td style="border-bottom:none;"><strong>Претензия в 1 клик + auto-resolve</strong></td><td style="border-bottom:none;">Amazon returns / self-service</td><td style="border-bottom:none;" class="mono red">TTR возврата ↓ · ExpReturns ↓ · UCM ↑</td><td style="border-bottom:none;" class="mono body-xs">claim_one_click_submit, claim_auto_resolved</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="foot"><span></span><span>30 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S31 · ПРИЛОЖЕНИЕ B4 · DATA READY
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="31 B4 Data Ready">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; gap:24px;">
+    <div class="kicker">Приложение B · Data Ready</div>
+    <div class="h1" style="max-width:1700px;">ЧЕК-ЛИСТ <span class="red">ДАННЫХ.</span></div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr 1fr; gap:24px; flex:1 1 auto;">
+      <div class="card" style="padding:28px;">
+        <span class="pill solid">1 · Идентичность</span>
+        <ul class="bullets" style="margin-top:14px; gap:10px;">
+          <li>Сквозные ключи user_id · device_id · session_id · flow_id · order_id</li>
+          <li>source = omni_inapp | omni_deeplink | market_standalone</li>
+          <li>Анти-дубликаты: идемпотентность по (order_id, payment_id, ts)</li>
+          <li>NSM «месяц» = календарный, UTC + local offset для витрин</li>
+          <li>aMAU-флаги: availability, eligibility, exposure_seen</li>
+        </ul>
+      </div>
+      <div class="card" style="padding:28px;">
+        <span class="pill solid">2 · События</span>
+        <div class="h6" style="margin-top:14px;">Воронка</div>
+        <div class="body-xs mono" style="margin-top:6px; color:var(--ink-3);">view_shop_entry · click_shop_entry · tab_source_select · plp_quick_add · plp_variant_open/select · multiadd_select/submit · cart_mixed_flag · cta_split_checkout_click · checkout_flow_id · pay_success/fail</div>
+        <div class="h6" style="margin-top:14px;">Post-purchase</div>
+        <div class="body-xs mono" style="margin-top:6px; color:var(--ink-3);">order_status_update{status, eta, band} · eta_risk_flag · claim_one_click_open/submit · claim_auto_resolved · contact_reason</div>
+        <div class="body-xs dim" style="margin-top:14px;">СЛА: лаг ≤ 5 мин · дроп пакетов ≤ 0.3%</div>
+      </div>
+      <div class="card red" style="padding:28px; color:#FFF;">
+        <span class="pill light-bg">3 · Справочники</span>
+        <ul class="bullets" style="margin-top:14px; gap:10px;">
+          <li style="color:rgba(255,255,255,0.92);">Каталог: sku_id, категория, атрибутность, вес/объём/темп.</li>
+          <li style="color:rgba(255,255,255,0.92);">Продавцы / магазины / СЦ, лог-зоны, правила слотов</li>
+          <li style="color:rgba(255,255,255,0.92);">Платежи: методы + фактические комиссии</li>
+          <li style="color:rgba(255,255,255,0.92);">OMS / ETA: статусы, SLA по СЦ</li>
+          <li style="color:rgba(255,255,255,0.92);">AOV_cat / share_cat — отдельно Delivery vs C&amp;C</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr; gap:24px;">
+      <div class="card" style="padding:28px;">
+        <div class="eyebrow red">4 · Метрики · NSM = MBC</div>
+        <div class="h5 mono" style="margin-top:12px; font-size:18px; line-height:1.5;">
+          MBC = uniq buyers (omni in-app / deeplink) / OMNI MAU<br/>
+          MDC = MBC × Fulfillment_success
+        </div>
+        <div class="body-xs dim" style="margin-top:14px;">Исключаем: standalone, тест / фрод, отмены до исполнения.</div>
+      </div>
+
+      <div class="card" style="padding:28px;">
+        <div class="eyebrow red">5 · Quality gates до A/B</div>
+        <ul class="bullets" style="margin-top:12px; gap:8px;">
+          <li>A/A 48 ч → SRM = 0 · расхождение ±0.5 п.п.</li>
+          <li>Монотонность воронки: Views ≥ CTR ≥ Intent ≥ ATC ≥ Checkout</li>
+          <li>Пропуски ключей &lt; 0.5% · дубли &lt; 0.5%</li>
+          <li>Согласованность ID сквозная ≥ 99.7%</li>
+          <li>В числителе NSM нет standalone (по source)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span></span><span>31 / 32</span></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     S32 · СПАСИБО
+══════════════════════════════════════════════════════════════════════════ -->
+<section data-screen-label="32 Спасибо">
+  <div class="nav">
+    <div class="brand-stack"><span>МАГНИТ</span><span style="color:#F4EFE7">OMNI</span></div>
+    <div class="nav-links"><span>Омниструктура</span><span>Принципы</span><span>Команды</span><span>Вакансии</span><span>Делимся опытом</span></div>
+  </div>
+
+  <!-- big red parallelograms -->
+  <div class="parallelo" style="left:-100px; bottom:-200px; width:480px; height:880px; transform:skewX(-12deg); opacity:0.95;"></div>
+  <div class="parallelo" style="left:280px; bottom:-180px; width:480px; height:920px; transform:skewX(-12deg); opacity:0.65;"></div>
+  <div class="parallelo" style="left:660px; bottom:-160px; width:480px; height:960px; transform:skewX(-12deg); opacity:0.35;"></div>
+  <div class="disc" style="right:200px; top:180px; width:240px; height:240px; opacity:0.6;"></div>
+
+  <div class="pad" style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; gap:48px;">
+    <div class="kicker">Q&amp;A · открытый разговор</div>
+    <div class="h-mega" style="line-height:0.85;">СПА<span class="red">СИ</span>БО.</div>
+    <div class="row" style="justify-content:space-between; align-items:flex-end; max-width:1600px;">
+      <div class="body" style="max-width:880px;">
+        Что хочется обсудить первым — экономику, эксперименты или последовательность инициатив?
+      </div>
+      <div class="col gap-8" style="text-align:right;">
+        <span class="eyebrow red">Тестовое задание</span>
+        <span class="h6 mono" style="font-weight:500;">E-com Lead · Магнит</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span></span><span>32 / 32</span></div>
+</section>
+<!-- The deck continues below — see further <section> blocks -->
+
+</deck-stage>
+
+<script src="project/deck-stage.js"></script>
+</body>
+</html>
